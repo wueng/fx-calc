@@ -96,14 +96,24 @@ textarea {
 /* ==========================================================================
    Author's custom styles
    ========================================================================== */
-#SendSection, #exIcon, #ReceiveSection{
+#SendSection, #exIcon, #ReceiveSection,#currIcon{
 	float:left;
+	display:inline-block;
+}
+#currIcon{
+	margin-left: 10px;
 }
 
 #sendCurrInput {
+	float:left;
 	text-align: right;
 }
+#mainHolder{
+	width:50%;
+	margin:auto;
+}
 
+p{text-align:center;}
 
 
 /* ==========================================================================

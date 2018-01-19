@@ -1,34 +1,44 @@
 getCurrencyList();
-$(document).ready(function(){
-
-$('#sendCurrInput').keyup(function(e){
-	//limit only for numeric characters
-	if((e.which > 48)&&(e.which < 57)||(e.which > 96)&&(e.which < 105)){
-		var actualValue = parseFloat($('#sendCurrInput').val())*10;
-		$('#sendCurrInput').val(parseFloat(actualValue).toFixed(2));
-	//control pasting text or when nothing is entered
-	}else if((isNaN($('#sendCurrInput').val()))){
-		$('#sendCurrInput').val(parseFloat('0.00'));
-	//controlling backspace
-	}else if(e.which == 8){
-		if($('#sendCurrInput').val()==''){
-			$('#sendCurrInput').val(parseFloat('0.00'));
-		}
-		var actualValue = parseFloat($('#sendCurrInput').val())/10;
-		$('#sendCurrInput').val(parseFloat(actualValue).toFixed(2));
-	//just make sure that anything that was entered is parsed to control the datatype.
-	}else{
-		console.log('Invalid Characters detected');
-		$('#sendCurrInput').val(parseFloat($('#sendCurrInput').val()).toFixed(2));
-		
-		//console.log(parseFloat($('#sendCurrInput').val()).toFixed(2));
-	}
-	console.log(e.which);
-	
-});
-
-});
 var currency = '';
+
+$(document).ready(function(){
+	$('#sendSelection').change(function() {
+		// update icon holder
+		$('#currIcon').empty();
+		$('#currIcon').append($('#sendSelection option:selected').attr('icon'));
+		//console.log($('#sendSelection option:selected').attr('icon'))
+	})
+	
+	$('#sendCurrInput').keyup(function(e){
+		//limit only for numeric characters
+		if((e.which > 48)&&(e.which < 57)||(e.which > 96)&&(e.which < 105)){
+			var actualValue = parseFloat($('#sendCurrInput').val())*10;
+			$('#sendCurrInput').val(parseFloat(actualValue).toFixed(2));
+		//control pasting text or when nothing is entered
+		}else if((isNaN($('#sendCurrInput').val()))){
+			$('#sendCurrInput').val(parseFloat('0.00'));
+		//controlling backspace
+		}else if(e.which == 8){
+			if($('#sendCurrInput').val()==''){
+				$('#sendCurrInput').val(parseFloat('0.00'));
+			}
+			var actualValue = parseFloat($('#sendCurrInput').val())/10;
+			$('#sendCurrInput').val(parseFloat(actualValue).toFixed(2));
+		//just make sure that anything that was entered is parsed to control the datatype.
+		}else{
+			console.log('Invalid Characters detected');
+			$('#sendCurrInput').val(parseFloat($('#sendCurrInput').val()).toFixed(2));
+			
+			//console.log(parseFloat($('#sendCurrInput').val()).toFixed(2));
+		}
+		console.log(e.which);
+		
+	});
+});
+
+function initIconHolder(){
+	$('#currIcon').append($('#sendSelection option:selected').attr('icon'));
+}
 
 function getCurrencyList(){
 	 var urlCurrencyRate = 'https://api.fixer.io/latest';
@@ -52,7 +62,8 @@ function addtoOptionSend(CPCList){
 	for(var i = 0; i < CPCList.length; i++){
 		$('#sendSelection').append('<option icon="'+CPCList[i].icon+'" value="'+CPCList[i].value+'">'+CPCList[i].code+' | '+CPCList[i].name+'</option>');
 	}
-
+	$('#sendSelection').append('<option icon="€" value="1">EUR | Euro</option>');
+	initIconHolder();
 }
 
 function createCurrencyPlusCountryList(cL, cCL){
