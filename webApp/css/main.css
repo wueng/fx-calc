@@ -96,15 +96,15 @@ textarea {
 /* ==========================================================================
    Author's custom styles
    ========================================================================== */
-#SendSection, #exIcon, #ReceiveSection,#currIcon{
+#SendSection, #exIcon, #ReceiveSection, #currSendIcon, #currReceiveIcon{
 	float:left;
 	display:inline-block;
 }
-#currIcon{
+#currReceiveIcon, #currSendIcon{
 	margin-left: 10px;
 }
 
-#sendCurrInput {
+#sendCurrInput, #receiveCurrInput{
 	float:left;
 	text-align: right;
 }

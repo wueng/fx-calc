@@ -3,41 +3,51 @@ var currency = '';
 
 $(document).ready(function(){
 	$('#sendSelection').change(function() {
-		// update icon holder
-		$('#currIcon').empty();
-		$('#currIcon').append($('#sendSelection option:selected').attr('icon'));
-		//console.log($('#sendSelection option:selected').attr('icon'))
+		// update icon for Sender
+		$('#currSendIcon').empty();
+		$('#currSendIcon').append($('#sendSelection option:selected').attr('icon'));
+		
+	})
+	$('#receiveSelection').change(function() {
+		// update icon for Receiver
+		$('#currReceiveIcon').empty();
+		$('#currReceiveIcon').append($('#receiveSelection option:selected').attr('icon'));
 	})
 	
-	$('#sendCurrInput').keyup(function(e){
+	$('#sendCurrInput, #receiveCurrInput').keyup(function(e){
 		//limit only for numeric characters
 		if((e.which > 48)&&(e.which < 57)||(e.which > 96)&&(e.which < 105)){
-			var actualValue = parseFloat($('#sendCurrInput').val())*10;
-			$('#sendCurrInput').val(parseFloat(actualValue).toFixed(2));
+			var actualValue = parseFloat($(this).val())*10;
+			$(this).val(parseFloat(actualValue).toFixed(2));
 		//control pasting text or when nothing is entered
-		}else if((isNaN($('#sendCurrInput').val()))){
-			$('#sendCurrInput').val(parseFloat('0.00'));
+		}else if((isNaN($(this).val()))){
+			$(this).val(parseFloat('0.00'));
 		//controlling backspace
 		}else if(e.which == 8){
-			if($('#sendCurrInput').val()==''){
-				$('#sendCurrInput').val(parseFloat('0.00'));
+			if($(this).val()==''){
+				$(this).val(parseFloat('0.00'));
 			}
-			var actualValue = parseFloat($('#sendCurrInput').val())/10;
-			$('#sendCurrInput').val(parseFloat(actualValue).toFixed(2));
+			var actualValue = parseFloat($(this).val())/10;
+			$(this).val(parseFloat(actualValue).toFixed(2));
 		//just make sure that anything that was entered is parsed to control the datatype.
 		}else{
 			console.log('Invalid Characters detected');
-			$('#sendCurrInput').val(parseFloat($('#sendCurrInput').val()).toFixed(2));
-			
-			//console.log(parseFloat($('#sendCurrInput').val()).toFixed(2));
+			$(this).val(parseFloat($(this).val()).toFixed(2));
 		}
 		console.log(e.which);
-		
+		// after initialisation is done calculate
+		//console.log($(this).attr("id"));
+		if($(this).attr("id") == 'sendCurrInput'){
+			calculationSend();
+		}else{
+			calculationReceive();
+		}
+		//console.log($(parentNode).find('select option:selected').val());
 	});
 });
 
-function initIconHolder(){
-	$('#currIcon').append($('#sendSelection option:selected').attr('icon'));
+function initIconHolder(sel){
+	$(sel).append($('#sendSelection option:selected').attr('icon'));
 }
 
 function getCurrencyList(){
@@ -53,17 +63,18 @@ function getCurrencyList(){
 			countryCodeList = json;
 			CplusCList = createCurrencyPlusCountryList(currencyList,countryCodeList);
 			console.log(CplusCList);
-			addtoOptionSend(CplusCList);
+			add2Option(CplusCList,'#sendSelection','#currSendIcon');
+			add2Option(CplusCList,'#receiveSelection','#currReceiveIcon');
 		});
 	 });
 }
 
-function addtoOptionSend(CPCList){
+function add2Option(CPCList, selector,icon){
 	for(var i = 0; i < CPCList.length; i++){
-		$('#sendSelection').append('<option icon="'+CPCList[i].icon+'" value="'+CPCList[i].value+'">'+CPCList[i].code+' | '+CPCList[i].name+'</option>');
+		$(selector).append('<option icon="'+CPCList[i].icon+'" value="'+CPCList[i].value+'">'+CPCList[i].code+' | '+CPCList[i].name+'</option>');
 	}
-	$('#sendSelection').append('<option icon="€" value="1">EUR | Euro</option>');
-	initIconHolder();
+	$(selector).append('<option icon="€" value="1">EUR | Euro</option>');
+	initIconHolder(icon);
 }
 
 function createCurrencyPlusCountryList(cL, cCL){
@@ -80,3 +91,16 @@ function createCurrencyPlusCountryList(cL, cCL){
 	return newList;
 }
 
+function calculationSend(){
+	//since the calculation is based on a EUR I need to devide and multiple after
+	var sendC = parseFloat($('#sendSelection option:selected').val());
+	var receiveC = parseFloat($('#receiveSelection option:selected').val());
+	var currResult = parseFloat($('#sendCurrInput').val())/sendC*receiveC
+	$('#receiveCurrInput').val(currResult.toFixed(2));
+}
+function calculationReceive(){
+	var sendC = parseFloat($('#sendSelection option:selected').val());
+	var receiveC = parseFloat($('#receiveSelection option:selected').val());
+	var currResult = parseFloat($('#receiveCurrInput').val())/receiveC*sendC
+	$('#sendCurrInput').val(currResult.toFixed(2));
+}
