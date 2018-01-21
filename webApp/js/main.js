@@ -60,6 +60,9 @@ $(document).ready(function(){
 				$(this).val(receiveInput);
 			}*/
 		}
+		if($(this).val() == Infinity){
+			$(this).val(parseFloat('0.00'));
+		}
 		//console.log(e.which);
 		
 		// after initialisation is done calculate
