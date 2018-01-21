@@ -1,4 +1,5 @@
 getCurrencyList();
+const CURRDECIMAL = 2;
 var currency = '';
 
 $(document).ready(function(){
@@ -6,22 +7,26 @@ $(document).ready(function(){
 		// update icon for Sender
 		$(this).parent().find('div').empty();
 		$(this).parent().find('div').append($(this).parent().find('select option:selected').attr('icon'));
-		/*$('#currSendIcon').empty();
-		$('#currSendIcon').append($('#sendSelection option:selected').attr('icon'));*/
-		
+		// update currency on different selection
+		/*
+		if($(this).attr("id") == "sendSelection"){
+			calculationSend();
+		}else{
+			calculationReceive();
+		}
+		*/
+		// I think previous implementation was a bit confusing for user in terms of functionality
+		// so I decided on a better solution below:
+		calculationSend();
+		// Sending Input field will only change when interacting with #receiveCurrInput
 	})
-	/*$('#receiveSelection').change(function() {
-		// update icon for Receiver
-		$('#currReceiveIcon').empty();
-		$('#currReceiveIcon').append($('#receiveSelection option:selected').attr('icon'));
-	})*/
+
 	
 	$('#sendCurrInput, #receiveCurrInput').keyup(function(e){
 		//limit only for numeric characters
 		if((e.which > 47)&&(e.which < 57)||(e.which > 95)&&(e.which < 105)){
-			console.log('1 pakopa');
 			var actualValue = parseFloat($(this).val())*10;
-			$(this).val(parseFloat(actualValue).toFixed(2));
+			$(this).val(parseFloat(actualValue).toFixed(CURRDECIMAL));
 		//control pasting text or when nothing is entered
 		}else if((isNaN($(this).val()))){
 			$(this).val(parseFloat('0.00'));
@@ -31,21 +36,20 @@ $(document).ready(function(){
 				$(this).val(parseFloat('0.00'));
 			}
 			var actualValue = parseFloat($(this).val())/10;
-			$(this).val(parseFloat(actualValue).toFixed(2));
+			$(this).val(parseFloat(actualValue).toFixed(CURRDECIMAL));
 		//just make sure that anything that was entered is parsed to control the datatype.
 		}else{
 			console.log('Invalid Characters detected');
-			$(this).val(parseFloat($(this).val()).toFixed(2));
+			$(this).val(parseFloat($(this).val()).toFixed(CURRDECIMAL));
 		}
 		console.log(e.which);
+		
 		// after initialisation is done calculate
-		//console.log($(this).attr("id"));
 		if($(this).attr("id") == 'sendCurrInput'){
 			calculationSend();
 		}else{
 			calculationReceive();
 		}
-		//console.log($(parentNode).find('select option:selected').val());
 	});
 });
 
@@ -61,11 +65,11 @@ function getCurrencyList(){
 	 var CplusCList = '';
 	 $.getJSON( urlCurrencyRate, function( json ) {// getting Currency data
 		currencyList = json;
-		console.log(currencyList);
+		//console.log(currencyList);
 		$.getJSON( urlCurrencyCountry, function( json ) {// getting country code associated with currency
 			countryCodeList = json;
+			//console.log(countryCodeList);
 			CplusCList = createCurrencyPlusCountryList(currencyList,countryCodeList);
-			console.log(CplusCList);
 			add2Option(CplusCList,'#sendSelection','#currSendIcon');
 			add2Option(CplusCList,'#receiveSelection','#currReceiveIcon');
 		});
@@ -85,8 +89,8 @@ function createCurrencyPlusCountryList(cL, cCL){
 	$.each(cL.rates, function(currCode,currValue){
 		$.each(cCL, function(currSearchCode,details){
 			if (currCode == currSearchCode){
-				//console.log(currCode+' '+details.name+' '+currValue);
-				item = {code:currCode,name:details.name,value:currValue,icon:details.symbol_native};
+				var item = {code:currCode,name:details.name,value:currValue,icon:details.symbol_native};
+				//console.log(item);
 				newList.push(item)
 			}
 		});
@@ -94,16 +98,18 @@ function createCurrencyPlusCountryList(cL, cCL){
 	return newList;
 }
 
+
+// these two last functions are very similar 
 function calculationSend(){
 	//since the calculation is based on a EUR I need to devide and multiple after
 	var sendC = parseFloat($('#sendSelection option:selected').val());
 	var receiveC = parseFloat($('#receiveSelection option:selected').val());
 	var currResult = parseFloat($('#sendCurrInput').val())/sendC*receiveC
-	$('#receiveCurrInput').val(currResult.toFixed(2));
+	$('#receiveCurrInput').val(currResult.toFixed(CURRDECIMAL));
 }
 function calculationReceive(){
 	var sendC = parseFloat($('#sendSelection option:selected').val());
 	var receiveC = parseFloat($('#receiveSelection option:selected').val());
 	var currResult = parseFloat($('#receiveCurrInput').val())/receiveC*sendC
-	$('#sendCurrInput').val(currResult.toFixed(2));
+	$('#sendCurrInput').val(currResult.toFixed(CURRDECIMAL));
 }
