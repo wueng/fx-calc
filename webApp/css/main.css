@@ -99,7 +99,13 @@ textarea {
 #SendSection, #exIcon, #ReceiveSection, #currSendIcon, #currReceiveIcon{
 	float:left;
 	display:inline-block;
+
 }
+
+#SendSection, #ReceiveSection{
+	margin-top:45px;
+}
+
 #currReceiveIcon, #currSendIcon{
 	margin-left: 10px;
 }
@@ -109,7 +115,7 @@ textarea {
 	text-align: right;
 }
 #mainHolder{
-	width:50%;
+	width:676px;
 	margin:auto;
 }
 
@@ -206,8 +212,15 @@ p{text-align:center;}
    Modify as content requires.
    ========================================================================== */
 
-@media only screen and (min-width: 35em) {
+@media only screen and (max-width: 676px) {
     /* Style adjustments for viewports that meet the condition */
+	#mainHolder {
+		width:238px;
+		margin:auto;
+	}
+	#SendSection, #ReceiveSection{
+		margin-top: 0px;
+	}
 }
 
 @media print,

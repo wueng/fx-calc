@@ -2,21 +2,24 @@ getCurrencyList();
 var currency = '';
 
 $(document).ready(function(){
-	$('#sendSelection').change(function() {
+	$('#sendSelection, #receiveSelection').change(function() {
 		// update icon for Sender
-		$('#currSendIcon').empty();
-		$('#currSendIcon').append($('#sendSelection option:selected').attr('icon'));
+		$(this).parent().find('div').empty();
+		$(this).parent().find('div').append($(this).parent().find('select option:selected').attr('icon'));
+		/*$('#currSendIcon').empty();
+		$('#currSendIcon').append($('#sendSelection option:selected').attr('icon'));*/
 		
 	})
-	$('#receiveSelection').change(function() {
+	/*$('#receiveSelection').change(function() {
 		// update icon for Receiver
 		$('#currReceiveIcon').empty();
 		$('#currReceiveIcon').append($('#receiveSelection option:selected').attr('icon'));
-	})
+	})*/
 	
 	$('#sendCurrInput, #receiveCurrInput').keyup(function(e){
 		//limit only for numeric characters
-		if((e.which > 48)&&(e.which < 57)||(e.which > 96)&&(e.which < 105)){
+		if((e.which > 47)&&(e.which < 57)||(e.which > 95)&&(e.which < 105)){
+			console.log('1 pakopa');
 			var actualValue = parseFloat($(this).val())*10;
 			$(this).val(parseFloat(actualValue).toFixed(2));
 		//control pasting text or when nothing is entered
