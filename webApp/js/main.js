@@ -72,7 +72,12 @@ $(document).ready(function(){
 });
 
 function initIconHolder(sel){
+	/*
+	$(sel).empty();
 	$(sel).append($('#sendSelection option:selected').attr('icon'));
+	*/
+	$(sel).parent().find('div').empty();
+	$(sel).parent().find('div').append($(sel).parent().find('select option:selected').attr('icon'));
 }
 
 function getCurrencyList(){
@@ -88,10 +93,11 @@ function getCurrencyList(){
 			countryCodeList = json;
 			//console.log(countryCodeList);
 			CplusCList = createCurrencyPlusCountryList(currencyList,countryCodeList);
-			add2Option(CplusCList,'#sendSelection','#currSendIcon');
+			add2Option(CplusCList,'#sendSelection');
 			//initialisation for first option to be selected as EURO.
 			$("#sendSelection option:last").attr("selected", "selected");
-			add2Option(CplusCList,'#receiveSelection','#currReceiveIcon');
+			initIconHolder('#sendSelection');
+			add2Option(CplusCList,'#receiveSelection');
 		});
 	 }).fail(function() { alert('This application has lost connection to internet or the to source of information, '
 		+'could you please try checking your connectivity or this link reachablity: https://api.fixer.io/latest . '
@@ -99,12 +105,12 @@ function getCurrencyList(){
 		+'\n\nIn order to be able to test this functionality try to disable your internet or rip out the internet cord from your computer :)')});
 }
 
-function add2Option(CPCList, selector,icon){
+function add2Option(CPCList, selector){
 	for(var i = 0; i < CPCList.length; i++){
 		$(selector).append('<option icon="'+CPCList[i].icon+'" value="'+CPCList[i].value+'">'+CPCList[i].code+' | '+CPCList[i].name+'</option>');
 	}
 	$(selector).append('<option icon="€" value="1">EUR | Euro</option>');
-	initIconHolder(icon);
+	initIconHolder(selector);
 }
 
 function createCurrencyPlusCountryList(cL, cCL){
