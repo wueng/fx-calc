@@ -25,7 +25,7 @@ $(document).ready(function(){
 	
 	$('#sendCurrInput, #receiveCurrInput').keyup(function(e){
 		//limit only for numeric characters
-		if((e.which > 47)&&(e.which < 57)||(e.which > 95)&&(e.which < 105)){
+		if((e.which > 47)&&(e.which < 58)||(e.which > 95)&&(e.which < 106)){
 			if(testing)console.log('Valid Number enetered');
 			var actualValue = parseFloat($(this).val())*10;
 			$(this).val(parseFloat(actualValue).toFixed(CURRDECIMAL));
