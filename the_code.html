@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Send or Receive money</title>
+<meta charset="utf-8">
+<!-- <script src="no_source.js"></script>
+<link rel="stylesheet" href="style.css"> -->
+
+<style type="text/css">
+
+.MainForm {
+   background: #d5d5d5;
+   height: 350px;
+   width: 750px;
+   padding:25px;
+   border-radius: 11px;
+}
+.line{
+	display: inline;
+}
+.right{
+	float:right;
+}
+.left{
+	float:left;
+}
+select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    text-indent: 1px;
+    text-overflow: '';
+}
+select::-ms-expand {display: none; }
+.SelCountry {
+   width: 360px;
+   height: 34px;
+   overflow: hidden;
+   background: url('http://webbim.do.am/temp/arrow.png') no-repeat right #fff;
+   border: 1px solid #4CAF50;
+   border-radius: 4px;
+   margin-bottom: 20px;
+}
+.SelCountry select {
+   background: transparent;
+   width: 100%;
+   padding: 5px;
+   font-size: 16px;
+   line-height: 1;
+   border: 0;
+   border-radius: 0;
+   height: 34px;
+   -webkit-appearance: none;
+}
+.SelCountry select option{
+  width:10px
+}
+
+input { /* AngularJS */
+  background-clip: padding-box;
+  background-color: rgb(255, 255, 255);
+  background-position:right center;outline:0;
+  border-bottom-color: #4CAF50;
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  border-image-outset: 0px;
+  border-image-repeat: stretch;
+  border-image-slice: 100%;
+  border-image-source: none;
+  border-image-width: 1;
+  border-left-color: #4CAF50;
+  border-left-style: solid;
+  border-left-width: 1px;
+  border-right-color: #4CAF50;
+  border-right-style: solid;
+  border-right-width: 1px;
+  border-top-color: #4CAF50;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  box-sizing: border-box;
+  color: rgb(73, 80, 87);
+  cursor: text;
+  display: block;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  font-stretch: 100%;
+  font-style: normal;
+  font-variant-caps: normal;
+  font-variant-east-asian: normal;
+  font-variant-ligatures: normal;
+  font-variant-numeric: normal;
+  font-weight: 150px;
+  height: 38px;
+  letter-spacing: normal;
+  line-height: 24px;
+  margin-bottom: 0px;
+  margin-left: 0px;
+  margin-right: 0px;
+  margin-top: 0px;
+  overflow-x: visible;
+  overflow-y: visible;
+  padding-bottom: 6px;
+  padding-left: 11px;
+  padding-right: 11px;
+  padding-top: 6px;
+  text-align: start;
+  text-indent: 0px;
+  text-rendering: auto;
+  text-shadow: none;
+  text-size-adjust: 100%;
+  text-transform: none;
+  touch-action: manipulation;
+  transition-delay: 0s, 0s;
+  transition-duration: 0.15s, 0.15s;
+  transition: border-color, box-shadow;
+  transition-timing-function: ease-in-out, ease-in-out;
+  width: 295px;
+  word-spacing: 0px;
+  writing-mode: horizontal-tb;
+  -webkit-appearance: none;
+  -webkit-rtl-ordering: logical;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-border-image: none;
+}
+.center{
+  padding-left: 0px;
+  padding-right: 0px;
+  text-align:center;
+}
+.sighn{
+background: #fff;
+    width: 31px;
+    height: 35px;
+    border: 1px solid #4CAF50;
+    border-radius: 4px;
+}
+</style>
+<!-- For GitHUB pull request the styles as well as script were passed in html file -->
+</head>
+
+<body id='body'> <!-- Html body from sketch with double side exchange -->
+<div class="MainForm">
+  <span class="line left">
+    <div class="SelCountry">
+    <select id='ecountry1' required>
+      <option value="">Country...</option>
+    </select>
+   </div>
+   <span class="line left">
+    <input step=0.01 id="ecur1" placeholder="0" aria-label="0">
+   </span>
+   <span class="line right center">
+    <input class='center' style='width:60px' id='country1sy' readonly value=''> <!-- no type="number" for no arrows in input, the value will be cheked in triggered function-->
+   </span>
+  </span>
+  <span class="line right">
+    <div class="SelCountry">
+    <select id='ecountry2' required>
+      <option value="">Country...</option>
+    </select>
+  </div>
+  <span class="line left">
+    <input step=0.01 id="ecur2" placeholder="0" aria-label="0">
+  </span>
+  <span class="line right center">
+    <input class='center' style='width:60px' id='country2sy' readonly value=''>
+  </span>
+</span>
+
+<script>
+var no={                        // Optimizing code
+    gebi: function(e){
+          return(document.getElementById(e));
+          },
+    loadJSON: function(url,callback) {            // no JSON data in html
+        var xobj = new XMLHttpRequest();
+        xobj.overrideMimeType("application/json");
+        xobj.open('GET',url, true);
+        xobj.onreadystatechange = function () {
+        if (xobj.readyState == 4 && xobj.status == "200") {
+        callback(JSON.parse(xobj.responseText));
+        }
+        };
+        xobj.send(null);}
+/*
+Sure can be used jQuery with $.getJSON( "name.json", function( data ) {})
+but in condition of such small project (size = 10kb) connect a framework (size > 85kb)
+is not an option.
+*/
+}
+
+// Storing elements for processing - less code and more performance
+var mult;                        //multiplier for converting
+var targ;                        //trigger element
+var symbols=[];                  //array with symbols for responsing
+var em1=no.gebi('ecur1');        //"element money of country 1"
+var em2=no.gebi('ecur2');        //"element money of country 2"
+var ec1=no.gebi('ecountry1');    //"element country 1"
+var ec2=no.gebi('ecountry2');    //"element country 2"
+var ecs1=no.gebi('country1sy');  //"element country 1 symbol"
+var ecs2=no.gebi('country2sy');  //"element country 2 symbol"
+ec1.addEventListener("input", function(){targ=this.id;url()}, true);                     //adding event listeners. no onInput or onChange for purpose to make html looks clear.
+ec2.addEventListener("input", function(){targ=this.id;url()}, true);
+em1.addEventListener("input", function(){targ=this.id; validate(this); if(this.value==''){em2.value='';}}, true);
+em2.addEventListener("input", function(){targ=this.id; validate(this); if(this.value==''){em1.value='';}}, true);
+
+no.loadJSON('https://restcountries.eu/rest/v2/all?fields=name;currencies',setCountryes); // loading list of countryes from 'restcountries.eu' with currencies
+
+function setCountryes(data){                                                             // creating dropdown list with countryes
+data;
+for (var i=0;i<data.length;i++){
+var option1 = document.createElement("option");
+var option2 = document.createElement("option");
+option1.text = data[i].name+' ('+data[i].currencies[Object.keys(data[i].currencies)[0]].code+')'; // Option text = country's name and currency symbol
+option1.value= data[i].currencies[Object.keys(data[i].currencies)[0]].code;                       // Option value = country's code
+option2.text = data[i].name+' ('+data[i].currencies[Object.keys(data[i].currencies)[0]].code+')';
+option2.value= data[i].currencies[Object.keys(data[i].currencies)[0]].code;
+ec1.add(option1);
+ec2.add(option2);
+/*
+Could be done as one extra element with just one list of cityes and this list will be triggered by clicking
+the Country's input, positioned under trigger element and closed after selecting. List would looks better and no need to create 270+ options in html what is kind of optimization.
+But in this case more functions need to be done such as list positioning from trigger element,
+trigger element value sharing-posting with this list, html code of this list. This brings more code and more logic to the project as well as
+one extra element that is not a good option.
+Extra way is to use jQuery selectBoxIt, but frameworks size is > 1mb (jQuery, selectBoxIt, UI, css and js)
+thus in purpose of this small project it's not an option too.
+*/
+var sym=data[i].currencies[Object.keys(data[i].currencies)[0]].symbol;                            // creating symbols array
+if (sym!==undefined){symbols.push(sym)}                                                           // if server don't have symbol of the country
+else{symbols.push(data[i].currencies[Object.keys(data[i].currencies)[0]].code)}                   // country's code will be used (but not "undefined")
+}};
+function setMult(data){                                                                           // checking for server errors
+            if (data.success==true){
+            mult = data.quotes[Object.keys(data.quotes)[0]];
+            validate();}
+            else{alert("Warning! \nPublic API's are in use. \nThey doesn't allows converting values by request. \nPlease, select FIRST country column with 'USD' currency.");}
+}
+
+function url(elem){ // loading the currencies
+  var result='http://www.apilayer.net/api/live?access_key=5059e27503666c7b9637019029ff1152&source=';  // In this project is used FREE API thus
+  var coun1=ec1[ec1.selectedIndex].value;                                                             // as source of the request just USD can be used.
+  if (coun1!==''){ecs1.value=symbols[ec1.selectedIndex-1]}                                            // Validating the request
+  else{ecs1.value=''};                                                                                // to update multiplier once the currency of
+  var coun2=ec2[ec2.selectedIndex].value;                                                             // any country is changed.
+  if (coun2!==''){ecs2.value=symbols[ec2.selectedIndex-1]}                                            // Done to make less server requests.
+  else{ecs2.value=''};
+  if ((coun1!=='')&&(coun2!=='')){result+=coun1+'&currencies='+coun2;
+  no.loadJSON(result,setMult)                                                                         // loading and callback function
+  };
+}
+
+function validate(elem){                                                                              // validator is needed to check all fields before converting process
+if (elem!==undefined){
+  elem.value=elem.value.replace(',', '.')                                                             // checking inputs: "," is changed with "." and just dot and digits are allowed
+                       .replace(/[^\d.]*/g, '')                                                       // to have just 2 digits after dot .toFixed(2) can not be used
+                       .replace(/([.])[.]+/g, '$1')                                                   // because it will rise the value of previous digit if next one is > 5
+                       .replace(/^[^\d]*(\d+([.]\d{0,2})?).*$/g, '$1');
+}
+
+/*
+Can be done as something like input onkeypress="return function_name(event)"
+function function_name(evt){
+    var charCode = (evt.which) ? evt.which : event.keyCode
+    if (charCode > 31 && (charCode != 46 &&(charCode < 48 || charCode > 57))) return false;
+    return true;
+}
+
+or something as parsing of the string and cheking every char in the input
+for (var i=0;i<elem.length;i++){
+  if (elem.value[i]!== @chars from previous code@){ elem.value = elem.value.split(elem.value[i]).join(elem.value[i+1]) }
+}
+
+but .replace looks better.
+*/
+
+if ((targ!=='ecur1')&&(targ!=='ecur2')){                                                              // validating the trigger and needed input
+if ( (em1.value!=='' && em2.value=='') || ( targ='ecountry1' && em1.value!=='' ) ){targ='ecur1'}      // to be changed. Less code and more performance
+else if ( (em1.value=='' && em2.value!=='') || ( targ='ecountry2' && em2.value!=='' ) ){targ='ecur2'}
+else {return}}
+if (ec1.value!=='' && ec2.value!==''){convert()}                                                      // last check to prevent server's errors
+}
+
+function convert(){                                                                                   // converting
+var result=0;
+var value=no.gebi(targ).value;
+if (targ=='ecur2'){targ=no.gebi('ecur1');result = (value*100)/(mult*100);}                            // JS arithmetic issues
+else {targ=no.gebi('ecur2');result = ((value*100)*(mult*100))/10000};                                 // like part-solution can be * to 100
+targ.value=result.toFixed(2);                                                                         // two digits after dot
+return; 
+}                                                                                                     // Thank you for reviewing the code =)
+</script>
+
+</body>
+</html>
