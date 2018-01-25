@@ -1,7 +1,7 @@
 # FX Calculator
 
 ## Description
-Create a simple, responsive currency exchange application using chosen front-end boilerplate and javascript framework. Application should validate and format user input, be tested and come with setup documentation.
+Create a simple, responsive currency exchange application using chosen front-end and javascript framework. Application should validate and format user input, be tested and come with setup documentation.
 
 Using free, public API's is allowed and encouraged to retrieve lists of countries, currencies and fx rates. 
 
@@ -23,7 +23,7 @@ Using free, public API's is allowed and encouraged to retrieve lists of countrie
 - [ ] Testing
 
 ## Technologies
-- [ ] HTML/CSS boilerplate
+- [ ] HTML/CSS framework
 - [ ] Javascript framework
 
 ## Final application
