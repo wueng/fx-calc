@@ -52,7 +52,7 @@ select::-ms-expand {display: none; }
    -webkit-appearance: none;
 }
 .SelCountry select option{
-  width:10px
+  background: #d5d5d5;
 }
 
 input { /* AngularJS */
@@ -253,13 +253,26 @@ function url(elem){ // loading the currencies
   };
 }
 
+function addSpaces(s){
+    x = s.split(' ');                                                                                 // array of strings separated by space
+    str1 = x[0];
+    str2 = x.length > 1 ? ' ' + x[1] : '';                                                            // if else state for adding space if there are more then 1 array element
+    var rep = /(\d+)(\d{3})/;                                                                         // In case value.length is bigger than 3
+    while (rep.test(str1)) {
+    str1 = str1.replace(rep, '$1' + ' ' + '$2');                                                      // it adds space and return value
+    }
+    return (str1 + str2);                                                                             // by this line.
+}
+
 function validate(elem){                                                                              // validator is needed to check all fields before converting process
 if (elem!==undefined){
   elem.value=elem.value.replace(',', '.')                                                             // checking inputs: "," is changed with "." and just dot and digits are allowed
                        .replace(/[^\d.]*/g, '')                                                       // to have just 2 digits after dot .toFixed(2) can not be used
                        .replace(/([.])[.]+/g, '$1')                                                   // because it will rise the value of previous digit if next one is > 5
                        .replace(/^[^\d]*(\d+([.]\d{0,2})?).*$/g, '$1');
+elem.value=addSpaces(elem.value);                                                                     // thousands separator
 }
+
 
 /*
 Can be done as something like input onkeypress="return function_name(event)"
@@ -281,15 +294,15 @@ if ((targ!=='ecur1')&&(targ!=='ecur2')){                                        
 if ( (em1.value!=='' && em2.value=='') || ( targ='ecountry1' && em1.value!=='' ) ){targ='ecur1'}      // to be changed. Less code and more performance
 else if ( (em1.value=='' && em2.value!=='') || ( targ='ecountry2' && em2.value!=='' ) ){targ='ecur2'}
 else {return}}
-if (ec1.value!=='' && ec2.value!==''){convert()}                                                      // last check to prevent server's errors
+if (ec1.value!=='' && ec2.value!==''){convert();}                                                      // last check to prevent server's errors
 }
 
 function convert(){                                                                                   // converting
 var result=0;
-var value=no.gebi(targ).value;
+var value=no.gebi(targ).value.replace(/ /g, '');
 if (targ=='ecur2'){targ=no.gebi('ecur1');result = (value*100)/(mult*100);}                            // JS arithmetic issues
 else {targ=no.gebi('ecur2');result = ((value*100)*(mult*100))/10000};                                 // like part-solution can be * to 100
-targ.value=result.toFixed(2);                                                                         // two digits after dot
+targ.value=addSpaces(result.toFixed(2));                                                                         // two digits after dot
 return; 
 }                                                                                                     // Thank you for reviewing the code =)
 </script>
