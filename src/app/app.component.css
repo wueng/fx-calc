@@ -1,0 +1,37 @@
+
+.country-amount-block {
+  width: 45%;
+  float: left;
+  margin-bottom: 20px;
+  font-size: 22px;
+}
+
+.country-amount-block select {
+  width: 100%;
+  -webkit-appearance: menulist-button;
+  height: 40px;
+  font-size: 18px;
+}
+
+.country-amount-block .input-header {
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+.country-amount-block input {
+height: 26px;
+font-size: 22px;
+}
+
+.arrows-display {
+  width: 10%;
+  float: left;
+  height: 80px;
+}
+
+@media screen and (max-width: 860px) {
+
+  .country-amount-block { width: 100%; }
+  .arrows-display { display: none; }
+
+}
