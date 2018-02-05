@@ -30,8 +30,8 @@
 
   <p>
   Date: {{ ratiosDate }}<br>
-  Exchange Rate: 1 {{ countries[fromCountryIndex].currency }} = {{ fromRatio }} {{ countries[toCountryIndex].currency }}
-  <span>(via EUR)</span>
+  Exchange Rate: 1 {{ countries[fromCountryIndex].currency }} = {{ fromRatio | number : '1.0-6' }} {{ countries[toCountryIndex].currency }}
+  <span *ngIf="ratioIsIndirect">(via EUR)</span>
   </p>
 
 </div>
