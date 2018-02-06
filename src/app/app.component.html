@@ -1,0 +1,42 @@
+
+<h1>FX-Calculator</h1>
+
+<div class="country-amount-block" id="from-block">
+
+  <div class="input-header">From Country:</div>
+
+  <select [(ngModel)]=fromCountryIndex (change)="didChangeCountry()">
+    <option *ngFor="let country of countries; index as i" [ngValue]="i">{{ country.name }} ({{ country.currency }})</option>
+  </select>
+
+  <div class="input-header">Amount:</div>
+  <input id="fromInput" [value]="fromAmountCents / 100 | number : '1.2-2' " (keyup)="didChangeFrom($event)" (change)="didFinishEditingFrom()" />
+  <span>{{ countries[fromCountryIndex].currency }}</span>
+
+</div>
+
+<div class="arrows-display">
+
+</div>
+
+<div class="country-amount-block" id="to-block">
+
+  <div class="input-header">To Country:</div>
+
+  <select [(ngModel)]=toCountryIndex (change)="didChangeCountry()">
+    <option *ngFor="let country of countries; index as i" [ngValue]="i">{{ country.name }} ({{ country.currency }})</option>
+  </select>
+
+  <div class="input-header">Amount:</div>
+  <input id="toInput" [value]="toAmountCents / 100 | number : '1.2-2' " (keyup)="didChangeTo($event)" />
+  <span>{{ countries[toCountryIndex].currency }}</span>
+
+</div>
+
+<div style="clear: both;"></div>
+
+<p>
+  Date: {{ ratiosDate }}<br>
+  Exchange Rate: 1 {{ countries[fromCountryIndex].currency }} = {{ fromRatio | number : '1.0-6' }} {{ countries[toCountryIndex].currency }}
+  <span *ngIf="ratioIsIndirect">(via EUR)</span>
+</p>
