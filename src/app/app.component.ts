@@ -35,25 +35,38 @@ export class AppComponent {
 
     // get exchange rates from http://fixer.io/
     let exchangesRatesRequest = this.http.get<ExchangeRatesResponse>("https://api.fixer.io/latest");
-    exchangesRatesRequest.subscribe(this.didLoadExchangeRates.bind(this));
+    exchangesRatesRequest.subscribe(this.didLoadExchangeRates.bind(this), this.didFailToLoad.bind(this));
 
     // get country list from https://restcountries.eu/
-    let countriesRequest = this.http.get("https://restcountries.eu/rest/v2/all?fields=name;currencies");
-    countriesRequest.subscribe(this.didLoadCountryList.bind(this));
+    let countriesRequest = this.http.get<CountryInfoResponse[]>("https://restcountries.eu/rest/v2/all?fields=name;currencies");
+    countriesRequest.subscribe(this.didLoadCountryList.bind(this), this.didFailToLoad.bind(this));
 
   }
 
   didLoadExchangeRates(data: ExchangeRatesResponse) {
-    this.baseCurrency = data.base;
-    this.ratiosDate = data.date;
-    let rates = data.rates;
-    this.rates = Object.keys(rates).map(code => { return { target: code, ratio: rates[code] }; } );
-    if (this.loadedCountries) { this.didLoadAllData(); }
+    try {
+      this.baseCurrency = data.base;
+      this.ratiosDate = data.date;
+      let rates = data.rates;
+      this.rates = Object.keys(rates).map(code => { return { target: code, ratio: rates[code] }; } );
+      if (this.loadedCountries) { this.didLoadAllData(); }
+    } catch (error) {
+      alert("Error: invalid format of loaded data.");
+    }
   }
 
   didLoadCountryList(data) {
-    this.loadedCountries = data.map(info => { return { name: info["name"], currency: info["currencies"][0]["code"] }; });
-    if (this.rates) { this.didLoadAllData(); }
+    try {
+      this.loadedCountries = data.map(info => { return { name: info.name, currency: info.currencies[0]["code"] }; });
+      if (this.rates) { this.didLoadAllData(); }
+    } catch (error) {
+      alert("Error: invalid format of loaded data.");
+    }
+
+  }
+
+  didFailToLoad(error) {
+    alert("Error: failed to load data. Please check your network connection.");
   }
 
   didLoadAllData() {
@@ -145,6 +158,11 @@ export interface ExchangeRatesResponse {
   base: string;
   date: string;
   rates: Object;
+}
+
+export interface CountryInfoResponse {
+  name: string;
+  currencies: Object[];
 }
 
 export interface ExchangeRate {
