@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" data-ng-app="ForEx">
+<head>
+    <meta charset="UTF-8" />
+    <title>Currency Converter in Angular</title>    
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" >
+	<style>
+	input.ng-invalid  {
+			  border: solid 1px red;
+		  }
+	select.ng-invalid  {
+			  border: solid 1px red;
+		  }
+	</style>
+</head>
+<body>
+    <div class="container" data-ng-controller="myController">
+        <div class="page-header">
+            <h1>WU ForEx</h1>
+        </div>   
+	<div class="row">	
+		<div class="col-md-6">
+			<div class="form-group">
+				<label><strong>From Country</strong></label>
+				<div class="col-md-8 col-md-offset-4">
+					<select ng-model="fromType" class="form-control" data-ng-change="validateCurrency() " required>
+						<option value="">--Select one--</option>
+						<option value="{{list.currencyCode}}" ng-repeat="list in countrylist | orderBy : 'countryName'">{{list.countryName}}</option>
+					</select>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-6">
+			<div class="form-group">
+				<label><strong>To Country</strong></label>
+				<div class="col-md-8 col-md-offset-4">
+					<select ng-model="toType" class="form-control" data-ng-change="validateCurrency()" required>
+						<option value="">--Select one--</option>
+						<option value="{{list.currencyCode}}" ng-repeat="list in countrylist | orderBy : 'countryName'">{{list.countryName}}</option>
+					</select>
+				</div>
+			 </div>		
+		</div>	
+	</div>
+	<div class="row">	
+		<div class="col-md-6">
+			<div class="form-group form-inline">
+				<div class="col-md-6 col-md-offset-4">
+					<input type="text" class="form-control" placeholder="Send amount" data-ng-model="fromValue" data-ng-change="validateCurrency()" required>
+				</div>
+				<div class="col-md-2">
+					<strong><span ng-bind="fromType"></span></strong>
+				</div>			
+				
+			</div>
+		</div>
+		<div class="col-md-6">
+			<div class="form-group form-inline">
+				<div class="col-md-6 col-md-offset-4">
+					<input type="text" class="form-control" placeholder="Receive amount" data-ng-model="toValue" data-ng-change="validateCurrency()" required>
+				</div>
+				<div class="col-md-2">
+					<strong><span ng-bind="toType"></span></strong>
+				</div>
+			</div>	
+		</div>	
+	</div>
+	</div>	   
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+    <script type="text/javascript" src="app.js"></script>
+</body>
+</html>
