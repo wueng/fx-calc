@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+<body>
+
+<div ng-app="myApp" ng-controller="myCtrl">
+
+    <select ng-model="selectedCurrancy">
+        <option value="" selected>From Country</option>
+        <option ng-repeat="x in currency track by x.currency" value="{{x.currency}}">{{x.simbol}}</option>
+    </select>
+
+    <select name="" ng-model="selectedCurrancy2">
+        <option value="" selected>To Country</option>
+        <option ng-repeat="x in currency" value="{{x.currency}}">{{x.simbol}}</option>
+    </select>
+
+    <br>
+    <input type="text" ng-model="amount" ng-change="getRate()" placeholder="{{send}}"/> {{selectedCurrancy}}
+
+    <br>
+    <input ng-model="amountExchanged" placeholder="{{received}}" readonly/>
+    {{selectedCurrancy2}}
+
+    <br>
+    {{ERROR}}
+</div>
+
+
+<script>
+    var app = angular.module('myApp', []);
+
+    app.controller('myCtrl', function ($scope, $http) {
+
+        $scope.send = 'send';
+        $scope.received = 'received';
+
+        $scope.getValue = function (x) {
+            var cur = $scope.selectedCurrancy || NaN;
+            $http.get("https://api.fixer.io/latest?base=" + cur + "")
+                .then(function (response) {
+                    $scope.myWelcome = response.data.rates;
+
+                    $scope.ERROR = ''
+                }).catch(function (data) {
+
+                $scope.ERROR = 'PLEASE SPECIFY CURRENCY FIRST';
+
+            });
+        };
+
+        $scope.getRate = function () {
+            var cur = $scope.selectedCurrancy || NaN;
+            var cur2 = $scope.selectedCurrancy2 || NaN;
+            $http.get("https://api.fixer.io/latest?base=" + cur + "")
+                .then(function (response) {
+                    var amount = $scope.amount;
+                    $scope.rateIs = response.data.rates[cur2];
+                    $scope.amountExchanged = response.data.rates[cur2] * amount;
+
+                    $scope.ERROR = ''
+
+                }).catch(function (data) {
+
+                $scope.ERROR = 'PLEASE SPECIFY CURRENCY FIRST';
+
+            });
+        };
+
+        $scope.currency = [
+            {'currency': 'AUD', 'simbol': 'Australian dollar'},
+            {'currency': 'BGN', 'simbol': 'Bulgarian lev'},
+            {'currency': 'BRL', 'simbol': 'Brazilian real'},
+            {'currency': 'CAD', 'simbol': 'Canadian dollar'},
+            {'currency': 'CHF', 'simbol': 'Swiss franc'},
+            {'currency': 'CNY', 'simbol': 'Chinese yuan renminbi'},
+            {'currency': 'CZK', 'simbol': 'Czech koruna'},
+            {'currency': 'DKK', 'simbol': 'Danish krone'},
+            {'currency': 'GBP', 'simbol': 'Pound sterling'},
+            {'currency': 'HKD', 'simbol': 'Hong Kong dollar'},
+            {'currency': 'HRK', 'simbol': 'Croatian kuna'},
+            {'currency': 'HUF', 'simbol': 'Hungarian forint'},
+            {'currency': 'IDR', 'simbol': 'Indonesian rupiah'},
+            {'currency': 'ILS', 'simbol': 'Israeli shekel'},
+            {'currency': 'INR', 'simbol': 'Indian rupee'},
+            {'currency': 'ISK', 'simbol': 'Icelandic krona'},
+            {'currency': 'JPY', 'simbol': 'Japanese yen'},
+            {'currency': 'KRW', 'simbol': 'South Korean won'},
+            {'currency': 'MXN', 'simbol': 'Mexican peso'},
+            {'currency': 'MYR', 'simbol': 'Malaysian ringgit'},
+            {'currency': 'NOK', 'simbol': 'Norwegian krone'},
+            {'currency': 'NZD', 'simbol': 'New Zealand dollar'},
+            {'currency': 'PHP', 'simbol': ' Philippine piso'},
+            {'currency': 'PLN', 'simbol': 'Polish zloty'},
+            {'currency': 'RON', 'simbol': 'Danish krone'},
+            {'currency': 'RUB', 'simbol': 'Russian rouble'},
+            {'currency': 'SEK', 'simbol': 'Swedish krona'},
+            {'currency': 'SGD', 'simbol': 'Singapore dollar'},
+            {'currency': 'THB', 'simbol': 'Thai baht'},
+            {'currency': 'TRY', 'simbol': ' Turkish lira'},
+            {'currency': 'USD', 'simbol': 'US dollar'},
+            {'currency': 'ZAR', 'simbol': ' South African rand'}
+        ];
+    });
+
+
+</script>
+
+</body>
+</html>
