@@ -7,7 +7,7 @@
 
     <select ng-model="selectedCurrancy">
         <option value="" selected>From Country</option>
-        <option ng-repeat="x in currency track by x.currency" value="{{x.currency}}">{{x.simbol}}</option>
+        <option ng-repeat="x in currency" value="{{x.currency}}">{{x.simbol}}</option>
     </select>
 
     <select name="" ng-model="selectedCurrancy2">
@@ -34,20 +34,6 @@
 
         $scope.send = 'send';
         $scope.received = 'received';
-
-        $scope.getValue = function (x) {
-            var cur = $scope.selectedCurrancy || NaN;
-            $http.get("https://api.fixer.io/latest?base=" + cur + "")
-                .then(function (response) {
-                    $scope.myWelcome = response.data.rates;
-
-                    $scope.ERROR = ''
-                }).catch(function (data) {
-
-                $scope.ERROR = 'PLEASE SPECIFY CURRENCY FIRST';
-
-            });
-        };
 
         $scope.getRate = function () {
             var cur = $scope.selectedCurrancy || NaN;
