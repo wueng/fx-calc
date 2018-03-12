@@ -1,0 +1,29 @@
+{
+  "name": "fx_calc",
+  "description": "",
+  "main": "index.js",
+  "authors": [
+    "TaWReOn <deniss.mosin@gmail.com>"
+  ],
+  "license": "ISC",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "^1.6.9",
+    "angular-ui-router": "^1.0.15",
+    "lodash": "^4.17.5",
+    "angular-bootstrap": "^2.5.0",
+    "angular-animate": "^1.6.9",
+    "angular-sanitize": "^1.6.9",
+    "bootstrap": "3.x.x",
+    "angular-vs-repeat": "1.1.7",
+    "flag-icon-css": "^3.1.0"
+  }
+}

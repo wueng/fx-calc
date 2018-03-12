@@ -1,0 +1,436 @@
+html {
+
+  //1rem === 10px;
+  font-size: 10px;
+
+  @include respond(tab-land) {
+    font-size: 9px;
+  }
+
+  @include respond(phone) {
+    font-size: 8px;
+  }
+
+  *::-webkit-scrollbar {
+    display: none;
+  }
+
+  input[type=number]::-webkit-inner-spin-button,
+  input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    margin: 0;
+  }
+
+  body {
+    background-color: lighten(gray, 45%);
+  }
+
+}
+
+.main-component {
+
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-flow: row nowrap;
+
+  .loading-screen-convertion {
+    position: fixed;
+    background-color: orange;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid darken(orange, 15%);
+    height: 65px;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 9999;
+    opacity: 1;
+
+    @include respond(phone) {
+      bottom: 0;
+      top: calc(100% - 64px);
+    }
+
+    span {
+      margin: 2rem;
+    }
+
+  }
+
+  .loading-screen-convertion + .fx-calc {
+    pointer-events: none;
+  }
+
+  .fx-calc {
+
+    display: flex;
+    flex-flow: column nowrap;
+    width: 100vh;
+    position: relative;
+
+    border-radius: $border-radius;
+    background-color: $wu;
+    border: 1px solid $black;
+    box-shadow: 0 2rem 4rem rgba($black, .5);
+
+    @include respond(tab-land) {
+      margin: 0 3rem;
+    }
+
+    @include respond(phone) {
+      border-radius: 0;
+      margin: 0;
+      height: 100vh;
+    }
+
+    .loading-screen {
+      border-radius: 2px;
+      position: absolute;
+      background-color: $wu;
+      display: flex;
+      flex-flow: row nowrap;
+      align-items: center;
+      justify-content: center;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 9999;
+
+      span {
+        margin: 2rem;
+      }
+
+    }
+
+    .fx-calc-top {
+
+      display: flex;
+      flex-flow: row nowrap;
+
+      @include respond(tab-land) {
+        flex-flow: column nowrap;
+      }
+
+      .fx-to {
+
+        @include respond(phone) {
+          margin-top: 25px !important;
+        }
+
+      }
+
+      .fx-from, .fx-to {
+
+        margin: 2rem;
+        flex: 0.5;
+
+        border-radius: $border-radius;
+
+        margin-bottom: 0;
+
+        @include respond(tab-land) {
+          margin-top: 0;
+        }
+
+        .fx-from-form {
+
+          display: flex;
+          flex-flow: column wrap;
+          justify-content: center;
+          margin-bottom: 0;
+
+          height: 110px;
+
+          @include respond(tab-land) {
+            margin-top: 25px;
+          }
+
+          @include respond(phone) {
+            margin-top: 0;
+          }
+
+          .fx-countries {
+
+            .current-country {
+
+              display: flex;
+              flex-flow: row nowrap;
+              justify-content: space-between;
+              align-items: center;
+
+              box-shadow: none;
+              width: 100%;
+              padding: 0;
+
+              height: 34px;
+              font-size: 1.4rem;
+              color: $black;
+              border: 1px solid #ccc;
+              background: white;
+
+              .caret {
+                margin-right: 1rem;
+              }
+
+            }
+
+            .current-country .choose-a-country {
+              padding: 0 1rem;
+            }
+
+          }
+
+          .input-wrapper {
+
+            margin: 0;
+
+            display: flex;
+            flex-flow: column nowrap;
+
+            .input-field {
+              display: flex;
+              flex-flow: row nowrap;
+            }
+
+            .fx-input {
+              border-radius: 0;
+              width: 100%;
+              color: $black;
+              caret-color: $black;
+              font-size: 1.4rem;
+            }
+
+            &.has-error .form-control, &.has-error .form-control + .input-group-addon {
+              color: red;
+              caret-color: red;
+              box-shadow: inset 0 1px 1px rgba(255, 0, 0, .075), 0 0 8px rgba(255, 71, 59, 0.6);
+              border: 1px solid lighten(red, 20%);
+            }
+
+            .fx-input-chosen {
+              border-top-right-radius: 0;
+              border-bottom-right-radius: 0;
+            }
+
+            .fx-currency-symbol {
+
+              border-radius: 0;
+              width: 40px;
+
+              .fx-currency-symbol-glyphicon {
+                transition: all .3s;
+                opacity: 0;
+                color: $black;
+                visibility: hidden;
+                line-height: 2rem;
+                display: block;
+
+                &.fx-currency-active {
+                  opacity: 1;
+                  visibility: visible;
+                }
+
+              }
+
+            }
+
+          }
+
+          .input-error-messages {
+
+            .help-block {
+
+              margin-bottom: 0;
+              text-align: left;
+              color: red;
+              height: 20px;
+              font-size: 1.4rem;
+
+              .help-block-error-text {
+                padding-left: 5px;
+              }
+
+            }
+
+          }
+
+        }
+
+      }
+
+      .left-right-arrow {
+
+        display: flex;
+        flex-flow: row nowrap;
+        align-items: center;
+        justify-content: center;
+
+        @include respond(tab-land) {
+          margin-top: 0;
+          width: 100%;
+          justify-content: flex-start;
+        }
+
+        &.no-click {
+          pointer-events: none;
+        }
+
+        .arrow {
+
+          display: block;
+          flex: 0.5;
+          cursor: pointer;
+          transition: all .5s;
+
+          @include respond(tab-land) {
+            transform: rotate(90deg);
+            flex: none;
+            padding: 1rem 0;
+          }
+
+          i {
+            font-size: 10rem;
+            display: block;
+
+            @include respond(tab-land) {
+              font-size: 5rem;
+              padding: 0;
+              padding-bottom: 20px;
+            }
+
+          }
+
+          &.disable-arrow {
+            pointer-events: none;
+            color: gray;
+          }
+
+        }
+
+      }
+
+    }
+
+    .fx-calc-bottom {
+
+      height: 0;
+
+      transition: all .3s;
+      backface-visibility: hidden;
+      display: flex;
+      flex-flow: row nowrap;
+      align-items: center;
+      justify-content: center;
+
+      &.toggle-open-bottom {
+        height: 60px;
+
+        @include respond(tab-land) {
+          height: 0;
+        }
+
+      }
+
+      @include respond(tab-land) {
+        height: 0;
+      }
+
+      .convert-info-wrapper {
+
+        @include respond(tab-land) {
+
+          position: absolute;
+          top: 44%;
+          right: 0;
+          width: calc(100% - 75px);
+
+        }
+
+        @include respond(phone) {
+
+          top: 132px;
+          width: calc(100% - 45px);
+
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+
+        }
+
+        span {
+
+          font-size: 3rem;
+
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+          width: 100vh;
+          padding: 0 2rem;
+
+          @include respond(tab-land) {
+
+            text-align: right;
+            padding-right: 20px;
+            width: 100%;
+
+          }
+
+          @include respond(phone) {
+            padding: 0 1rem;
+            font-size: 20px;
+          }
+
+        }
+
+      }
+
+    }
+
+  }
+
+  .dropdown-menu {
+
+    min-width: 100%;
+    overflow-y: scroll;
+
+    .country-single {
+
+      padding: 0.5rem;
+
+      &:hover {
+        background-color: #f5f5f5;
+        cursor: pointer;
+      }
+
+      display: flex;
+      flex-flow: row nowrap;
+      align-items: center;
+
+    }
+
+    .active {
+
+      background-color: lighten(#286090, 30%);
+
+      &:hover {
+        background-color: lighten(#286090, 20%);
+      }
+
+    }
+
+    .active > country-view > .country-view > .country-wrapper > * {
+      color: white;
+    }
+
+  }
+
+}
+
+
+
