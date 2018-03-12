@@ -1,0 +1,211 @@
+<div class="main-component" id="main">
+
+  <div class="loading-screen-convertion" ng-if="vm.busyConverting">
+    <span>Converting</span>
+    <loading-spinner></loading-spinner>
+  </div>
+
+
+  <div class="fx-calc">
+
+    <div class="loading-screen" ng-if="!vm.countriesLoaded">
+      <span>Loading Countries</span>
+      <loading-spinner></loading-spinner>
+    </div>
+
+    <div class="fx-calc-top">
+
+      <div class="fx-from">
+
+        <form name="vm.currecnyFromForm" class="fx-from-form" novalidate>
+
+          <div class="btn-group fx-countries" uib-dropdown keyboard-nav>
+
+            <button type="button" class="current-country" uib-dropdown-toggle>
+              <country-view ng-if="vm.currentFrom" country="vm.currentFrom"></country-view>
+              <span class="choose-a-country" ng-if="!vm.currentFrom"> Choose a country </span>
+              <span class="caret"></span>
+            </button>
+
+            <ul
+              resize resize-offset-top="1" resize-property="height"
+              class="dropdown-menu"
+              vs-repeat="30"
+            >
+              <li role="menuitem" class="country-single"
+                  ng-repeat="country in vm.countries track by country.alpha2Code"
+                  ng-click="vm.countrySingleClick(country)"
+                  ng-class="{active: vm.currentFrom.alpha2Code === country.alpha2Code}"
+              >
+
+                <country-view country="country"></country-view>
+
+              </li>
+
+            </ul>
+
+          </div>
+
+          <div class="input-wrapper form-group"
+               ng-class="{'has-error': ( vm.currecnyFromForm.$error.number || vm.currecnyFromForm.$error.pattern
+             ) && !vm.currecnyFromForm.$pristine
+             }">
+
+            <div class="input-field">
+
+              <input
+                id="currencyFrom"
+                type="number"
+                ng-model="vm.currencyFrom"
+                autocomplete="off"
+                min="0.1"
+                ng-pattern="/^[0-9]+([,\.][0-9]+)?$/"
+                class="form-control fx-input"
+                track-focused
+                aria-describedby="helpBlock1"
+                ng-keyup="vm.currencyToKeyPress($event, '>')"
+                ng-disabled="vm.busyConverting"
+              />
+
+              <span
+
+                class="input-group-addon fx-currency-symbol">
+
+              <span
+                class="fx-currency-symbol-glyphicon"
+                ng-class="{'fx-currency-active' : vm.currentFrom.currencies[0].symbol}">
+                  {{vm.currentFrom.currencies[0].symbol}}
+                </span>
+
+            </span>
+
+            </div>
+
+
+            <div class="input-error-messages">
+
+              <div id="helpBlock1" class="help-block">
+                <span class="help-block-error-text"
+                      ng-if="vm.currecnyFromForm.$error.number || vm.currecnyFromForm.$error.pattern">
+                  Wrong Input. Please, type correct value
+                </span>
+              </div>
+
+            </div>
+
+          </div>
+
+        </form>
+
+      </div>
+
+      <div class="left-right-arrow" ng-class="{'no-click': (!vm.currentFrom && !vm.currentTo) || vm.busyConverting }">
+
+        <span class="arrow" ng-click="vm.swapCountriesDebounceClick()"
+              ng-class="{'disable-arrow': vm.busyDebounceSwap}">
+          <i class="glyphicon glyphicon-resize-horizontal">
+          </i>
+        </span>
+
+      </div>
+
+      <div class="fx-to">
+
+        <form name="vm.currecnyToForm" class="fx-from-form" novalidate>
+
+          <div class="btn-group fx-countries" uib-dropdown keyboard-nav>
+
+            <button type="button" class="current-country" uib-dropdown-toggle>
+              <country-view ng-if="vm.currentTo" country="vm.currentTo"></country-view>
+              <span class="choose-a-country" ng-if="!vm.currentTo"> Choose a country </span>
+              <span class="caret"></span>
+            </button>
+
+            <ul resize resize-offset-top="1" resize-property="height" class="dropdown-menu" vs-repeat="30">
+              <li role="menuitem" class="country-single"
+                  ng-repeat="country in vm.countries track by country.alpha2Code"
+                  ng-click="vm.countrySingleClick(country, 'to')"
+                  ng-class="{active: vm.currentTo.alpha2Code === country.alpha2Code}"
+              >
+
+                <country-view country="country"></country-view>
+
+              </li>
+
+            </ul>
+
+          </div>
+
+          <div class="input-wrapper form-group"
+               ng-class="{'has-error': ( vm.currecnyToForm.$error.number || vm.currecnyToForm.$error.pattern
+             ) && !vm.currecnyToForm.$pristine
+             }">
+
+            <div class="input-field">
+
+              <input
+                id="currencyTo"
+                type="number"
+                ng-model="vm.currencyTo"
+                autocomplete="off"
+                min="0.1"
+                ng-pattern="/^[0-9]+([,\.][0-9]+)?$/"
+                class="form-control fx-input"
+                track-focused
+                aria-describedby="helpBlock2"
+                ng-keyup="vm.currencyToKeyPress($event, '<')"
+                ng-disabled="vm.busyConverting"
+              />
+
+              <span class="input-group-addon fx-currency-symbol">
+
+                <span
+                  class="fx-currency-symbol-glyphicon"
+                  ng-class="{'fx-currency-active' : vm.currentTo.currencies[0].symbol}">
+                  {{vm.currentTo.currencies[0].symbol}}
+                </span>
+
+              </span>
+
+            </div>
+
+
+            <div class="input-error-messages">
+
+
+              <div class="input-error-messages">
+
+                <div id="helpBlock2" class="help-block">
+                  <span class="help-block-error-text"
+                        ng-if="vm.currecnyToForm.$error.number || vm.currecnyToForm.$error.pattern">
+                    Wrong Input. Please, type correct value
+                  </span>
+                </div>
+
+              </div>
+
+
+            </div>
+
+          </div>
+
+        </form>
+
+      </div>
+
+    </div>
+
+    <div class="fx-calc-bottom" ng-class="{'toggle-open-bottom': vm.concatedConvertInfo}">
+
+      <div class="convert-info-wrapper" ng-if="vm.concatedConvertInfo">
+        <span class="convert-info-to"> {{vm.concatedConvertInfo}}</span>
+      </div>
+
+    </div>
+
+  </div>
+
+
+</div>
+
+

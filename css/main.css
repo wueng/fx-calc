@@ -1,0 +1,118 @@
+body {
+  padding: 10px;
+  background-color: #78acd9; }
+
+.main-component {
+  height: 90vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-flow: row nowrap; }
+  .main-component .fx-calc {
+    background-color: #fd0;
+    display: flex;
+    flex-flow: row wrap;
+    border-radius: 5px;
+    height: 25vh;
+    width: 10%;
+    box-shadow: 0 2rem 4rem rgba(0, 0, 0, 0.5); }
+    .main-component .fx-calc .fx-from {
+      margin: 20px;
+      flex: 0.5; }
+      .main-component .fx-calc .fx-from .fx-from-form {
+        display: flex;
+        flex-flow: column wrap;
+        margin-bottom: 0; }
+        .main-component .fx-calc .fx-from .fx-from-form .input-wrapper {
+          margin-top: 10px;
+          display: flex;
+          flex-flow: row nowrap; }
+          .main-component .fx-calc .fx-from .fx-from-form .input-wrapper .fx-input {
+            width: 100%; }
+          .main-component .fx-calc .fx-from .fx-from-form .input-wrapper .fx-input-chosen {
+            border-top-right-radius: 0;
+            border-bottom-right-radius: 0; }
+          .main-component .fx-calc .fx-from .fx-from-form .input-wrapper .fx-currency-symbol {
+            transition: all .3s;
+            opacity: 0;
+            visibility: hidden;
+            width: 40px; }
+            .main-component .fx-calc .fx-from .fx-from-form .input-wrapper .fx-currency-symbol .fx-currency-symbol-glyphicon {
+              line-height: 20px;
+              display: block; }
+          .main-component .fx-calc .fx-from .fx-from-form .input-wrapper .fx-currency-active {
+            width: 40px;
+            opacity: 1;
+            visibility: visible; }
+    .main-component .fx-calc .fx-to {
+      margin: 20px;
+      flex: 0.5; }
+    .main-component .fx-calc .fx-from, .main-component .fx-calc .fx-to {
+      background-color: #d6ba00;
+      font-size: 1.5rem;
+      padding: 2.5rem;
+      text-align: center;
+      border-radius: 5px;
+      box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.15); }
+    .main-component .fx-calc .left-right-arrow {
+      width: 7%;
+      display: flex;
+      flex-flow: row nowrap;
+      align-items: center; }
+      .main-component .fx-calc .left-right-arrow .left-arrow {
+        -webkit-clip-path: polygon(40% 0%, 40% 20%, 100% 20%, 100% 80%, 40% 80%, 40% 100%, 0% 50%);
+        clip-path: polygon(40% 0%, 40% 20%, 100% 20%, 100% 80%, 40% 80%, 40% 100%, 0% 50%); }
+      .main-component .fx-calc .left-right-arrow .right-arrow {
+        -webkit-clip-path: polygon(0% 20%, 60% 20%, 60% 0%, 100% 50%, 60% 100%, 60% 80%, 0% 80%);
+        clip-path: polygon(0% 20%, 60% 20%, 60% 0%, 100% 50%, 60% 100%, 60% 80%, 0% 80%); }
+      .main-component .fx-calc .left-right-arrow .left-arrow, .main-component .fx-calc .left-right-arrow .right-arrow {
+        background: #343434;
+        height: 10%;
+        flex: 0.5; }
+  .main-component .country-single {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center; }
+    .main-component .country-single:hover {
+      background-color: #f5f5f5;
+      cursor: pointer; }
+    .main-component .country-single .country-wrapper {
+      width: 100%; }
+      .main-component .country-single .country-wrapper .country-flag {
+        padding-left: 10px;
+        width: 30px;
+        height: 30px;
+        object-fit: contain; }
+      .main-component .country-single .country-wrapper .country-name {
+        padding-left: 10px;
+        text-decoration: none; }
+  .main-component .dropdown-menu {
+    min-width: 370px;
+    overflow-y: scroll; }
+
+.country-popover {
+  min-width: 300px; }
+  .country-popover .popover-content {
+    padding: 0;
+    min-width: 300px; }
+  .country-popover .testing-popover {
+    overflow-y: scroll;
+    margin: 0;
+    padding: 0; }
+  .country-popover .country-single {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center; }
+    .country-popover .country-single:hover {
+      background-color: #f5f5f5;
+      cursor: pointer; }
+    .country-popover .country-single .country-wrapper {
+      width: 100%; }
+      .country-popover .country-single .country-wrapper .country-flag {
+        padding-left: 10px;
+        width: 30px;
+        height: 30px;
+        object-fit: contain; }
+      .country-popover .country-single .country-wrapper .country-name {
+        padding-left: 10px;
+        text-decoration: none; }
