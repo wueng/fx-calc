@@ -10,6 +10,6 @@
   
 ## Working environment
 
-  - [*] macOS 10.12.6
-  - [*] node v7.5.0
-  - [*] bower v1.8.2
+  - [ ] macOS 10.12.6
+  - [ ] node v7.5.0
+  - [ ] bower v1.8.2
