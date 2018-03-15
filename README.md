@@ -1,30 +1,24 @@
-# FX Calculator
 
-## Description
-Create a simple, responsive currency exchange application using chosen front-end and javascript framework. Application should validate and format user input, be tested and come with setup documentation.
+# FX-Calculator 
 
-Using free, public API's is allowed and encouraged to retrieve lists of countries, currencies and fx rates. 
+FX-Calculator is a simple, responsive currency exchange application using Bootstrap and AngularJS framework as well as jQuery library. It validates, formats user's input. Uses public API "https://restcountries.eu/rest/v2/all?fields=name;currencies for country list and "https://api.fixer.io/latest?base=USD" for rates list. From these two lists new country list with supported rates is formed and used in receive and send drop down lists.
 
-## Sketch
-![Sketch](https://i.imgur.com/rOyVXlz.png)
+# Setup
 
-1. Choose FROM country
-1. Choose TO country
-1. Enter/show SEND amount (editable field)
-1. Show selected FROM country currency
-1. Enter/show RECEIVE amount (editable field)
-1. Show selected TO country currency
+Node and npm is required to run the application on //localhost:8080
 
-## Application requirements
-- [ ] Git and Github for code versioning
-- [ ] Setup documentation
-- [ ] Responsive
-- [ ] Field formatting and validation
-- [ ] Testing
+To setup run "npm i" command in the /fx-calc folder through command line.
+To run application run "npm serve" command.
 
-## Technologies
-- [ ] HTML/CSS framework
-- [ ] Javascript framework
+# Code samples and/or ideas used from 
 
-## Final application
-Please work on a fork. After completing the application, please create a Pull Request to this repository.
+http://plnkr.co/edit/ZdShIA?p=preview
+https://www.w3schools.com/bootstrap/tryit.asp?filename=trybs_default&stacked=h 
+
+
+# Still to updates needed
+
+1. VALIDATION  AND FORMATING -
+2. TESTING
+3. SETUP DOCUMENTATION +/-
+
