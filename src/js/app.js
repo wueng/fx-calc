@@ -1,5 +1,12 @@
 angular.module('app', []);
 
+angular.module('app', ['ui.numericInput'])
+
+angular.module('app', ['number-input']);
+
+angular.module('app', ['purplefox.numeric'])
+
+
 angular.module('app').controller('Calc',
     function ($scope, $http) {
 
@@ -13,6 +20,9 @@ angular.module('app').controller('Calc',
                 cur: "GBP",
             }
         }
+
+        $scope.model2 = 0;
+        $scope.sendInput = 0;
 
         // on change calling money.js function to recalculate receive amount
         $scope.calculateReceiveAmt = function () {
