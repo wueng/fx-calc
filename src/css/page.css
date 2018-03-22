@@ -1,0 +1,17 @@
+.fxCalc {
+	margin-top: 30px;
+	min-width: 320px;
+}
+
+
+/* Error validation for fields */
+.fxCalc input.ng-invalid {
+	border-color: red;
+}
+
+/* Slight bootstrap override */
+@media(max-width: 992px) {
+	.fxCalc .collumn {
+		padding: 0px 30px;
+	}
+}

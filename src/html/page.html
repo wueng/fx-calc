@@ -1,0 +1,83 @@
+<div class = "container fxCalc">
+	<div class = "row">	
+		<!-- Define a couple of collumns -->
+		<!-- From currency -->
+		<div class = "col-xs-12 col-sm-6 collumn">
+			<div class = "row">
+				<!-- Select boxes -->
+				<div class = "form-group">
+					<span>To country</span>
+					<select
+						class = "form-control"
+						data-ng-if = "currencies"
+						data-ng-model = "selectedCurrencies.fromCurrency"
+						data-ng-options = "currency as currency.countryName for currency in ::currencies track by currency.countryNumericCode"
+						data-required = "true"
+						data-ng-change = "onCurrencyChanged()">
+							<option value = "">From country</option>
+					</select>
+				</div>
+
+				<!-- Amount to be sent -->
+				<div class = "form-group" data-ng-if = "selectedCurrencies.fromCurrency && selectedCurrencies.toCurrency">
+					<span>Amount to be sent</span>
+
+					<div class="input-group">
+						<input
+							class = "form-control"
+							type = "number"
+							inputmode = "decimal"
+							min = "0"
+							ng-pattern = ""
+							data-ng-model = "selectedCurrencies.fromCurrency.amount"
+							data-ng-pattern = \d*([.,]\d{0,2})?
+							data-ng-change = "onAmountChanged('fromCurrency')"/>
+						<div class="input-group-append">
+							<span class="input-group-text" data-ng-bind = "selectedCurrencies.fromCurrency.currencySymbol"></span>
+					  	</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- To currency -->
+		<div class = "col-xs-12 col-sm-6 collumn">
+			<div class = "row">
+
+				<!-- Select box -->
+				<div class = "form-group">
+					<span>To country</span>
+					<select
+						class = "form-control"
+						data-ng-if = "currencies"
+						data-ng-model = "selectedCurrencies.toCurrency"
+						data-ng-options = "currency as currency.countryName for currency in ::currencies track by currency.countryNumericCode"
+						data-required = "true"
+						data-ng-change = "onCurrencyChanged()">
+							<option value = "">To country</option>
+					</select>
+				</div>
+
+				<!-- Amount to be sent -->
+				<div class = "form-group" data-ng-if = "selectedCurrencies.fromCurrency && selectedCurrencies.toCurrency">
+					<span>Amount to be received</span>
+
+					<div class="input-group">
+						<input
+							class = "form-control"
+							type = "number"
+							inputmode = "decimal"
+							min = "0"
+							ng-pattern = ""
+							data-ng-model = "selectedCurrencies.toCurrency.amount"
+							data-ng-pattern = \d*([.,]\d{0,2})?
+							data-ng-change = "onAmountChanged('toCurrency')"/>
+						<div class="input-group-append">
+							<span class="input-group-text" data-ng-bind = "selectedCurrencies.toCurrency.currencySymbol"></span>
+					  	</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
