@@ -1,0 +1,30 @@
+<!doctype html>
+
+<html lang = "en" data-ng-app = "fxCalc" data-ng-strict-di>
+	<head>
+	  <meta charset="utf-8">
+
+	  <title>Send or receive money</title>
+	  <meta name="description" content = "Foreign exchange calculator">
+	  <meta name="viewport" content="width=device-width">
+
+	  <!-- Load bootstrap -->
+	  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+	  <!-- And the theme for the page -->
+	  <link rel = "stylesheet" href = "build/app.min.css">
+	</head>
+
+	<body >
+		<!-- No point in using proper routing for a single page -->
+		<data-ng-include data-src = "'page.html'"
+			data-ng-controller = "pageController">
+		</data-ng-include>
+
+		<!-- Load frameworks -->
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+
+		<!-- Load app -->
+		<script src = "build/app.min.js"></script>
+	</body>
+</html>
