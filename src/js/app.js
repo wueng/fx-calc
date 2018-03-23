@@ -5,9 +5,7 @@ angular.module('app', ['purplefox.numeric'])
 angular.module('app').controller('Calc',
     function ($scope, $http) {
 
-        $scope.a = 1;
-
-        $scope.formOpts = {
+         $scope.formOpts = {
             send: {
                 amt: 100,
                 cur: "SEK",
