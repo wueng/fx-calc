@@ -1,14 +1,11 @@
 angular.module('app', []);
-
-angular.module('app', ['ui.numericInput'])
-
-angular.module('app', ['number-input']);
-
 angular.module('app', ['purplefox.numeric'])
 
 
 angular.module('app').controller('Calc',
     function ($scope, $http) {
+
+        $scope.a = 1;
 
         $scope.formOpts = {
             send: {
@@ -21,19 +18,15 @@ angular.module('app').controller('Calc',
             }
         }
 
-        $scope.model2 = 0;
-        $scope.sendInput = 0;
-
         // on change calling money.js function to recalculate receive amount
         $scope.calculateReceiveAmt = function () {
-            //$scope.formOpts.receive.amt = Math.round(fx($scope.formOpts.send.amt).from($scope.formOpts.send.cur).to($scope.formOpts.receive.cur) * 100) / 100   
-            $scope.formOpts.receive.amt = fx($scope.formOpts.send.amt).from($scope.formOpts.send.cur).to($scope.formOpts.receive.cur).toFixed(2);
+            var sendAmt = angular.isNumber($scope.formOpts.send.amt) ? $scope.formOpts.send.amt : 0;
+            $scope.formOpts.receive.amt = fx(sendAmt).from($scope.formOpts.send.cur).to($scope.formOpts.receive.cur).toFixed(2);
         }
 
-
         $scope.calculateSendAmt = function () {
-            $scope.formOpts.send.amt = Math.round(fx($scope.formOpts.receive.amt).from($scope.formOpts.receive.cur).to($scope.formOpts.send.cur) * 100)/ 100;
-            //$scope.formOpts.send.amt = fx($scope.formOpts.receive.amt).from($scope.formOpts.receive.cur).to($scope.formOpts.send.cur).toFixed(2);
+            var receiveAmt = angular.isNumber($scope.formOpts.receive.amt) ? $scope.formOpts.receive.amt : 0;
+            $scope.formOpts.send.amt = fx(receiveAmt).from($scope.formOpts.receive.cur).to($scope.formOpts.send.cur).toFixed(2);
         }
 
         var init = function () {
@@ -65,8 +58,9 @@ angular.module('app').controller('Calc',
             console.log(oldValue, newValue);
         };
 
-        $scope.$watch('formOpts', onChange, true);
-        $scope.$watch('listOfCountries', onChange, true);
+        // $scope.$watch('formOpts', onChange, true);
+        // $scope.$watch('listOfCountries', onChange, true);
+
         //debugging
     }
 )
