@@ -1,0 +1,36 @@
+{
+  "name": "fx-calc",
+  "version": "1.0.0",
+  "description": "Create a simple, responsive currency exchange application using chosen front-end and javascript framework. Application should validate and format user input, be tested and come with setup documentation.",
+  "main": "index.js",
+  "scripts": {
+    "serve": "node ./node_modules/http-server/bin/http-server ./",
+    "test": "node ./node_modules/karma/bin/karma start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dr-audrius/fx-calc.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dr-audrius/fx-calc/issues"
+  },
+  "homepage": "https://github.com/dr-audrius/fx-calc#readme",
+  "dependencies": {
+    "angular": "^1.6.9",
+    "angular-mocks": "^1.6.9",
+    "angular-numeric-directive": "^1.0.0",
+    "bootstrap": "^4.0.0",
+    "http-server": "^0.11.1",
+    "jquery": "^3.3.1",
+    "money": "^0.2.0",
+    "popper.js": "^1.14.1"
+  },
+  "devDependencies": {
+    "jasmine-core": "^3.1.0",
+    "karma": "^2.0.0",
+    "karma-chrome-launcher": "^2.2.0",
+    "karma-jasmine": "^1.1.1"
+  }
+}

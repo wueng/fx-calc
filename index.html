@@ -1,0 +1,93 @@
+<!doctype html>
+<html data-ng-app="app" data-ng-cloak>
+
+<head>
+    <title>fx-rate</title>
+    <script src="./node_modules/angular/angular.js"></script>
+    <script src="./node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="./node_modules/popper.js/dist/umd/popper.min.js"></script>
+    <script src="./node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="./node_modules/angular-numeric-directive/src/numeric-directive.js"></script>
+
+    <script src="./node_modules/money/money.js"></script>
+    <script src="./src/js/app.js"></script>
+
+    <link rel="stylesheet" href="./src/css/style.css">
+    <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css">
+</head>
+
+
+<body data-ng-controller="Calc">
+    <div class="container">
+        <form class="row" name="myForm">
+            <div class="col-md-6">
+                <br/>
+                <select class="form-control" data-ng-model="formOpts.send.cur" data-ng-options="item.currencies[0].code as item.name + ', ' + item.currencies[0].code  for item in listOfCountriesWithRates"
+                    data-ng-change="calculateReceiveAmt()" name="fromList"></select>
+                <hr/>
+                <input class="form-control" data-numeric data-ng-model="formOpts.send.amt"  name="sendAmt" data-ng-change="calculateReceiveAmt()" data-ng-class=" {'is-invalid' : myForm.sendAmt.$invalid}"> 
+                <!-- <input class="form-control" data-numeric data-ng-model="formOpts.send.amt"  name="sendAmt" data-ng-change="calculateReceiveAmt()" data-ng-class=" {'is-invalid' : myForm.sendAmt.$invalid}">  --> 
+                <h5>{{formOpts.send.cur}}</h5>
+    
+            </div>
+            <div class="col-md-6">
+                <br/>
+                <select class="form-control" data-ng-model="formOpts.receive.cur" data-ng-options="item.currencies[0].code as item.name + ', ' + item.currencies[0].code for item in listOfCountriesWithRates"
+                    data-ng-change="calculateReceiveAmt()" name="sendList"></select>
+                <hr/>
+                <input data-numeric class="form-control" data-ng-model="formOpts.receive.amt"  name="receiveAmt" data-ng-change="calculateSendAmt()">
+                <h5>{{formOpts.receive.cur}}</h5>
+           </div>
+            <div class="col-md-6"><br/>Turn Debug mode <input type="checkbox" data-ng-model="myVar"> </div>
+        </form>
+        <br/>
+        <div data-ng-show="myVar">
+            <div class="col-md-12" style="border: 1px solid black">
+                <br/>
+                <pre>RATES (listOfRates)</pre>
+                <pre>{{listOfRates}}</pre>
+                <pre>COUNTRIES (listOfCountries)</pre>
+                <pre>{{listOfCountries}}</pre>
+                <pre>COUNTRIES WITH RATES (listOfCountriesWithRates)</pre>
+                <pre>{{listOfCountriesWithRates}}</pre>
+            </div>
+            <div class="container">
+                <br/>
+                <div class="row">
+                    <div class="col-sm-4" style="border: 1px solid black">
+                        <h5>LIST OF COUNTRIES (listOfCountries)</h5>
+                        <p></p>
+                        <table>
+                            <tr data-ng-repeat="x in listOfCountries">
+                                <td>{{ x.name }}</td>
+                                <td>{{ x.currencies[0].code }}</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="col-sm-4" style="border: 1px solid black">
+                        <h5>LIST OF RATES (listOfRates)</h5>
+                        <p></p>
+                        <table>
+                            <tr data-ng-repeat="(x,y) in listOfRates">
+                                <td>{{ x }}</td>
+                                <td>{{ y }}</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="col-sm-4" style="border: 1px solid black">
+                        <h5>FILTERED COUNTRIES WITH RATES (listOfCountriesWithRates)</h5>
+                        <p></p>
+                        <table>
+                            <tr data-ng-repeat="x in listOfCountriesWithRates">
+                                <td>{{ x.name }}</td>
+                                <td>{{ x.currencies[0].code }}</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
