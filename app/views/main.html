@@ -1,0 +1,60 @@
+<div class="container">
+    <form class="row" name="form">
+        <div class="col-md-6">
+            <br/>
+
+            <select class="form-control"
+                    title="From country"
+                    data-ng-change="controller.calculateReceiverAmount()"
+                    data-ng-model="controller.sender"
+                    data-ng-options="country.name for country in controller.countries track by country.code"
+            >
+                <option value="">From country</option>
+            </select>
+
+            <hr/>
+
+            <div class="row">
+                <div class="col-md-8">
+                    <input class="form-control"
+                           data-numeric
+                           data-ng-model="controller.senderAmount"
+                           data-ng-change="controller.calculateReceiverAmount()"
+                           placeholder="Send amount"
+                    >
+                </div>
+                <div class="col-md-4 fx-calc-vertical-align-middle">
+                    {{ controller.sender.currencyCode }}
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <br/>
+
+            <select class="form-control"
+                    title="To country"
+                    data-ng-change="controller.calculateReceiverAmount()"
+                    data-ng-model="controller.receiver"
+                    data-ng-options="country.name for country in controller.countries track by country.code"
+            >
+                <option value="">To country</option>
+            </select>
+
+            <hr/>
+
+            <div class="row">
+                <div class="col-md-8">
+                    <input class="form-control"
+                           data-numeric
+                           data-ng-model="controller.receiverAmount"
+                           placeholder="Receive amount"
+                    >
+                </div>
+                <div class="col-md-4 fx-calc-vertical-align-middle">
+                    {{ controller.receiver.currencyCode }}
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
