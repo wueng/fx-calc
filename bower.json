@@ -6,12 +6,12 @@
   "license": "MIT",
   "private": true,
   "dependencies": {
-    "angular": "*",
-    "angular-loader": "*",
-    "angular-mocks": "*",
+    "angular": "^1.6.10",
+    "angular-numeric-directive": "*",
     "angular-ui-router": "^1.0.15",
     "bootstrap": "^4.1.0",
     "money": "^0.1.3",
-    "angular-numeric-directive": "*"
+    "jquery": "^3.3.1",
+    "popper.js": "^1.14.3"
   }
 }

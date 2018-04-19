@@ -22,28 +22,11 @@
                     files: ['app/js/**', 'app/views/**'],
                     tasks: ['ngAnnotate', 'uglify']
                 }
-            },
-
-            cacheBust: {
-                taskName: {
-                    options: {
-                        baseDir: 'app',
-                        queryString: true,
-                        length: 4,
-                        assets: ['bower_components/**', 'css/**', 'img/**', 'compiled-js/**']
-                    },
-                    files: [{
-                        src: [
-                            'app/index.html'
-                        ]
-                    }]
-                }
-            },
+            }
         });
         grunt.loadNpmTasks('grunt-ng-annotate');
         grunt.loadNpmTasks('grunt-contrib-uglify');
         grunt.loadNpmTasks('grunt-contrib-watch');
-        grunt.loadNpmTasks('grunt-cache-bust');
 
         grunt.registerTask('default', ['ngAnnotate', 'uglify']);
     };
