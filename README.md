@@ -4,6 +4,10 @@ Install dependencies:
 
 ``$ npm install``
 
+Build application:
+
+``$ grunt``
+
 Start application:
 
 ``$ npm start``
