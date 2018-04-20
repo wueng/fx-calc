@@ -1,5 +1,7 @@
 # Currency exchange application
 
+In order to run application you need to have npm, bower and grunt installed.
+
 Install dependencies:
 
 ``$ npm install``
