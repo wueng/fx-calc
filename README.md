@@ -1,30 +1,21 @@
-# FX Calculator
+# Currency exchange application
 
-## Description
-Create a simple, responsive currency exchange application using chosen front-end and javascript framework. Application should validate and format user input, be tested and come with setup documentation.
+In order to run application you need to have npm, bower and grunt installed.
 
-Using free, public API's is allowed and encouraged to retrieve lists of countries, currencies and fx rates. 
+Install dependencies:
 
-## Sketch
-![Sketch](https://i.imgur.com/rOyVXlz.png)
+``$ npm install``
 
-1. Choose FROM country
-1. Choose TO country
-1. Enter/show SEND amount (editable field)
-1. Show selected FROM country currency
-1. Enter/show RECEIVE amount (editable field)
-1. Show selected TO country currency
+Build application:
 
-## Application requirements
-- [ ] Git and Github for code versioning
-- [ ] Setup documentation
-- [ ] Responsive
-- [ ] Field formatting and validation
-- [ ] Testing
+``$ grunt``
 
-## Technologies
-- [ ] HTML/CSS framework
-- [ ] Javascript framework
+Start application:
 
-## Final application
-Please work on a fork. After completing the application, please create a Pull Request to this repository.
+``$ npm start``
+
+Open link in a browser: http://localhost:8000
+
+Run tests:
+
+``$ npm run protractor``
