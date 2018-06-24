@@ -1,0 +1,24 @@
+
+doctype html 
+html(ng-app='currencyApp')
+head
+title Currency Calculator
+meta(charset='utf-8')
+meta( name="viewport" content="width=device-width, initial-scale=1")
+meta(http-equiv='X-UA-Compatible',content='IE=edge')
+
+//- script(src='uiassets/js/fwk/script.min.js')
+//- script(src='uiassets/js/fwk/uiscript.js')
+script(src='uiassets/js/fwk/angular.min.js')
+script(src='uiassets/js/fwk/angular-route.min.js')
+script(src='uiassets/js/fwk/jquery.min.js')
+
+script(src='uiassets/js/fwk/bootstrap.min.js')
+script(src='uiassets/js/currency.fct.js')
+script(src='uiassets/js/currency.app.js')
+script(src='uiassets/js/currency.ctrl.js')
+
+link(rel='stylesheet',href='uiassets/stylesheets/bootstrap/bootstrap.min.css')
+link(rel='stylesheet',href='uiassets/stylesheets/style.css')
+body
+div(ng-view)

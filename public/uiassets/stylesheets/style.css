@@ -1,0 +1,25 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+
+.content-wrapper{
+  margin-top: 12%;
+  padding: 45px 40px;
+  border: 2px solid black; 
+  }
+  .currency-block{
+    max-width: 80%;
+    max-height: 80%
+    }
+  .currency{
+
+    margin-left: -6%;
+    padding-top: 1%;
+
+
+  }
