@@ -1,30 +1,27 @@
-# FX Calculator
+Steps to run the project:-
 
-## Description
-Create a simple, responsive currency exchange application using chosen front-end and javascript framework. Application should validate and format user input, be tested and come with setup documentation.
+1. Download node latest version.
+2. Go to project directory.
+3. Open Command Prompt.
+4. run npm install to download project related modules.
+5. run npm start
 
-Using free, public API's is allowed and encouraged to retrieve lists of countries, currencies and fx rates. 
+hit the url http://localhost:3000/
 
-## Sketch
-![Sketch](https://i.imgur.com/rOyVXlz.png)
+We are using:-
 
-1. Choose FROM country
-1. Choose TO country
-1. Enter/show SEND amount (editable field)
-1. Show selected FROM country currency
-1. Enter/show RECEIVE amount (editable field)
-1. Show selected TO country currency
+1. CountryCode.json in order to find All countries for dropdown.
+2. CountryCode.json in order to find currency for a particular country.
+3. Public api https://exchangeratesapi.io/api/latest?base="fromCurrency"&symbols="toCurrency" which does not support some of the currency .
 
-## Application requirements
-- [ ] Git and Github for code versioning
-- [ ] Setup documentation
-- [ ] Responsive
-- [ ] Field formatting and validation
-- [ ] Testing
+Some of the currency which api supports are given below:-
 
-## Technologies
-- [ ] HTML/CSS framework
-- [ ] Javascript framework
+1. EUR- Austria, Belgium, Cyprus, Estonia, Finland, France, Germany, Greece, Ireland, Italy, Latvia, Lithuania,Luxembourg, Malta, the Netherlands, Portugal, Slovakia, Slovenia, and Spain.
+2. USD-United states 
+3. INR-India
+4. IDR-Indonesia,
+5. ISK-Iceland
+6. THB -Thailand
 
-## Final application
-Please work on a fork. After completing the application, please create a Pull Request to this repository.
+
+

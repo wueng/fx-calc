@@ -1,0 +1,55 @@
+
+<div class="container">
+        <div class="col-md-12 col-md-offset-3  content-wrapper">
+          <h2 class="text-center">Currency Convertor</h2>
+        
+          <div class="row" style="margin-top:30px">
+              <label for="CompanyId" class="col-md-2">From Country</label> 
+              <div class="form-group col-md-4">
+                  <!-- <input type="text" placeholder="Your currency"  class="form-control"  name="Name" id="Name" > -->
+                  <select class="form-control"   name="your_country" ng-model="fromCountry"  ng-change="findCurrency('from')"  ng-options="key as value for (key , value) in fromCountries " > 
+                        <option value="">-- Please select country --</option>
+                  </select>
+                        
+              </div>
+              <label for="CompanyId" class="col-md-2">Currency Code</label> 
+              
+            <div class="form-group  col-md-2 "> 
+                  <input type="text" placeholder="currency" ng-model="fromCurrency"  class="form-control"  name="Name" id="Name" disabled> 
+                </div>
+         </div>
+         <div class="row" style="margin-top:30px">
+                <label for="CompanyId" class="col-md-2">To Country</label> 
+                <div class="form-group col-md-4">
+                    <!-- <input type="text" placeholder="Your currency"  class="form-control"  name="Name" id="Name" > -->
+                    <select class="form-control"   name="your_country" ng-model="toCountry"  ng-change="findCurrency('to')"  ng-options="key as value for (key , value) in toCountries">  
+                            <option value="">-- Please select country --</option>
+                    </select> 
+                </div>
+            <label for="CompanyId" class="col-md-2">Currency Code</label> 
+              <div class="form-group  col-md-2 "> 
+                    <input type="text" placeholder="currency" ng-model="toCurrency"  class="form-control"  name="Name" id="Name" disabled> 
+                  </div>
+           </div>
+
+
+          <div class="row" style="margin-top:30px">
+              <label for="CompanyId" class="col-md-2">Send Money</label> 
+              <div class="form-group  col-md-3 col-sm-3">
+                  <input type="text" placeholder="0.0" ng-model="sAmount"  ng-keypress="myFunction($event,'send')"   ng-model-options="{debounce: 750}" 
+                  ng-change="Convert('direct')" class="form-control"  name="Name" id="Name"  ng-disabled="disabled">
+              </div>
+              <div class="col-md-1 col-sm-1 currency" >
+                  {{fromCurrency}}
+              </div>
+              <label for="CompanyId" class="col-md-2">Receive money</label> 
+              <div class="form-group  col-md-3 col-sm-3">
+                  <input type="text" placeholder="0.0" ng-model="rAmount" ng-keypress="myFunction($event,'receive')" ng-model-options="{debounce: 750}" 
+                  ng-change="Convert('reverse')" class="form-control"  name="Name" id="Name"  ng-disabled="disabled">
+              </div>
+              <div class="col-md-1 col-sm-1 currency" >
+                  {{toCurrency}}  
+                </div>
+          </div>
+        </div>
+      </div>
