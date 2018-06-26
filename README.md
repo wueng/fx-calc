@@ -3,7 +3,8 @@ Steps to run the project:-
 1. Download node latest version.
 2. Go to project directory.
 3. Open Command Prompt.
-4. run npm start.
+4. run npm install to download project related modules.
+5. run npm start
 
 hit the url http://localhost:3000/
 
