@@ -1,0 +1,31 @@
+
+.calcWrp{
+    background: #fff;
+    padding-top:20px;
+    padding-bottom: 20px;
+
+}
+
+
+select.ng-pristine{
+    font-style: italic;   
+}
+
+.symbol{
+    display: inline-block; width: 15%; text-align: right
+}
+
+@media screen and (max-width: 768px){
+    .todoapp h1{ font-size: 60px;}
+}
+
+
+@media screen and (max-width: 478px){
+    .todoapp h1{ font-size: 50px;}
+}
+
+@media screen and (max-width: 321px){
+    .todoapp h1{ font-size: 25px; margin-top: 50px;}
+    
+    .todoapp{ margin: 20px;}
+}
