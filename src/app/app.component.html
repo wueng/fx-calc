@@ -1,0 +1,38 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div class="container">
+<section class="todoapp">
+    <header class="header">
+       
+        
+    </header>
+    <div class="main">  
+        
+      </div>  
+      <div class="row">
+          <div class="col-xs">
+              <h1 style="margin-top: 50px"> Fx Calculator</h1>
+          </div>
+        </div>    
+      <div class="row calcWrp">           
+        <div class="col-xs col-sm-4">
+          <select class="form-control form-group" aria-placeholder="From Country" [(ngModel)]="formCountry"  (change)="getValue()">   
+              <option  disabled="true" [selected]="!formCountry" value="">From Country</option>               
+              <option *ngFor="let country of calcStore.countryList" value={{country.currencyId}}>{{ country.name}}</option>
+          </select>               
+          <input type="number" class="form-control" style="width: 80%; display: inline-block;" min="0" minlength="1" placeholder="Send" [(ngModel)]="senderAmount" 
+          (keyup)="getValue()"/> <div class="symbol"> {{ fromCurrencySymbol }} </div>
+        </div>
+        <div class="col-xs col-sm-4">
+          <div class="text-center" style="margin-top: 30px" (click)="swapCountries()"> <i class="glyphicon glyphicon-resize-horizontal">icon</i> </div>
+        </div>
+        <div class="col-xs col-sm-4">
+            <select class="form-control form-group" aria-placeholder="To Country" [(ngModel)]="toCountry" (change)="getValue()">
+                <option disabled="true" [selected]="!toCountry" value="">To Country</option>               
+                <option *ngFor="let country of calcStore.countryList" value={{country.currencyId}}>{{ country.name}}</option>
+            </select>
+            <input type="number" class="form-control" style="width: 80%; display: inline-block;" placeholder="Receive amount" [(ngModel)]="reciverAmount" />
+            <div class="symbol"> {{ toCurrencySymbol }} </div>
+        </div>            
+      </div>
+</section>
+</div>
