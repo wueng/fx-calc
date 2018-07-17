@@ -1,30 +1,13 @@
 # FX Calculator
 
 ## Description
-Create a simple, responsive currency exchange application using chosen front-end and javascript framework. Application should validate and format user input, be tested and come with setup documentation.
+The app creates a simple, responsive currency exchange application using Angular front-end javascript framework. Application uses the free public apis which allows max of 100 calls for 1 hr.
 
-Using free, public API's is allowed and encouraged to retrieve lists of countries, currencies and fx rates. 
 
-## Sketch
-![Sketch](https://i.imgur.com/rOyVXlz.png)
+## Build Steps
+1) cmd - 'npm install' to install all the dependicies
+2) cmd - 'ng-start' to start the application
+3) cmd - 'npm test' to run the test cases of the application.
 
-1. Choose FROM country
-1. Choose TO country
-1. Enter/show SEND amount (editable field)
-1. Show selected FROM country currency
-1. Enter/show RECEIVE amount (editable field)
-1. Show selected TO country currency
+Please use standard git commands for creating the branch or pull request for contributing
 
-## Application requirements
-- [ ] Git and Github for code versioning
-- [ ] Setup documentation
-- [ ] Responsive
-- [ ] Field formatting and validation
-- [ ] Testing
-
-## Technologies
-- [ ] HTML/CSS framework
-- [ ] Javascript framework
-
-## Final application
-Please work on a fork. After completing the application, please create a Pull Request to this repository.
