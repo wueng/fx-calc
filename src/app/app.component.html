@@ -1,0 +1,58 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12 col-md-12 col-lg-12 text-center">
+      <h1>{{title}}</h1>
+    </div>
+  </div>
+  <div class="row d-flex justify-content-center align-items-center">
+    <div class="col-xs-8 col-md-4 col-lg-4">
+      <p>
+        <select [(ngModel)]="fromCode" (change)="getFXRate()" [compareWith]="compareFn">
+          <option [ngValue]="selected" disabled >From Country</option>
+          <option *ngFor="let from of countries" [ngValue]="from.currencies[0].code == null ? from.currencies[1] : from.currencies[0]">{{from.name}}</option>
+        </select>
+      </p>
+      <div class="form-input">
+        <label>Send</label>
+        <div class="input-group">
+            <input type="number" [(ngModel)] = "send" (keyup)="convertCurrency(1)" placeholder="Amount" class="form-control">
+            <div class="input-group-append">
+                <div class="d-inline-flex p-2">{{ fromCode.symbol ? fromCode.symbol : fromCode.code }}</div>
+            </div>
+        </div>
+      </div>
+      </div>
+      <div class="col-lg-2 col-md-2 text-center img-control">
+        <span><img src="assets/images/twoWayArrow.png" alt="Two Way Arrow"/></span>
+      </div>
+    <div class="col-xs-8 col-md-4 col-lg-4">
+      <p>
+        <select [(ngModel)]="toCode" (change)="getFXRate()" [compareWith]="compareFn">
+          <option [ngValue]="selected" disabled >To Country</option>
+          <option *ngFor="let to of countries" [ngValue]="to.currencies[0].code == null ? to.currencies[1] : to.currencies[0]">{{to.name}}</option>
+        </select>
+      </p>
+      <div class="form-input">
+        <label>Receive</label>
+        <div class="input-group">
+            <input type="number"[(ngModel)] = "receive" (keyup)="convertCurrency(2)" placeholder="Amount" class="form-control">
+            <div class="input-group-append">
+                <div class="d-inline-flex p-2">{{ toCode.symbol ? toCode.symbol : toCode.code }}</div>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12 col-lg-12 col-md-12 d-inline-flex justify-content-center p-2" *ngIf="rate">
+        <span class="alert alert-dark" role="alert">
+            The FX Rate of 1 {{fromCode.code}} = {{rate | number : '1.2-4'}} {{toCode.code}}, 1 {{toCode.code}} = {{1/rate | number : '1.2-4'}} {{fromCode.code}}
+        </span>
+    </div>
+    <div class="col-sm-12 col-lg-12 col-md-12 d-inline-flex justify-content-center p-2" *ngIf="fxError">
+        <span class="alert alert-danger" role="alert">
+          FXRate not available. Please select a different country.
+        </span>
+    </div>
+  </div>
+</div>
