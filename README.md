@@ -1,19 +1,29 @@
 # FX Calculator
 
 ## Description
-Create a simple, responsive currency exchange application using chosen front-end and javascript framework. Application should validate and format user input, be tested and come with setup documentation.
+Created a simple, responsive currency exchange application using Angular 5 and Bootstrap 4 framework.
 
-Using free, public API's is allowed and encouraged to retrieve lists of countries, currencies and fx rates. 
+Used free, public API's to retrieve lists of countries, currencies and fx rates.
 
 ## Sketch
-![Sketch](https://i.imgur.com/rOyVXlz.png)
+![Sketch](https://i.imgur.com/dUUXxe8.png)
 
-1. Choose FROM country
-1. Choose TO country
-1. Enter/show SEND amount (editable field)
-1. Show selected FROM country currency
-1. Enter/show RECEIVE amount (editable field)
-1. Show selected TO country currency
+## Setup documentation
+1.	Set up the Development Environment-
+ - Install the node.js and npm if they are not already on your computer.
+ - Verify Node.js version and npm by running node -v and npm -v in a terminal/console window. 
+ - Then install the Angular CLI globally - npm install -g @angular/cli
+ - Check angular CLI version: ng –v
+
+2.	Setup the Project FX-Calculator
+ - Install the Node Modules using the following command – sudo npm install
+ - Use ng serve command to launch the server, watches your files, and rebuilds the app as you make changes to those files.
+
+## Github Pages
+Also, created the same application using FlexBox (without Bootstrap). Here is the link - 
+https://pratikshachouhan.github.io/FX-Calculator-Flex/
+
+Here is the link to the submitted application using Bootstrap 4 - https://pratikshachouhan.github.io/FX-Calculator/
 
 ## Application requirements
 - [ ] Git and Github for code versioning
@@ -25,6 +35,3 @@ Using free, public API's is allowed and encouraged to retrieve lists of countrie
 ## Technologies
 - [ ] HTML/CSS framework
 - [ ] Javascript framework
-
-## Final application
-Please work on a fork. After completing the application, please create a Pull Request to this repository.
