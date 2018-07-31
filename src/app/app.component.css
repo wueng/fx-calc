@@ -1,0 +1,105 @@
+
+input[type=text], select, textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: vertical;
+}
+
+label {
+  padding: 12px 12px 12px 0;
+  display: inline-block;
+}
+
+input[type=submit] {
+  background-color: #4CAF50;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  float: right;
+}
+
+input[type=submit]:hover {
+  background-color: #45a049;
+}
+
+.container {
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 20px;
+}
+
+.col-50 {
+  float: left;
+  width: 70%;
+  margin-top: 6px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+form {
+  width: 600px;
+  margin: 0 auto;
+  display: flex;
+  padding: 53px;
+}
+.row{
+  width: 100%;
+}
+.currencyFields{
+  display: inline-flex;
+}
+.currencySymbol{
+  padding: 8px 0 0 10px;
+  font-size: 1.25rem;
+  font-weight: 600;
+  display: block;
+}
+.converterImage{
+  width: 30px;
+    position: absolute;
+    top: 110px;
+    right: 52%;
+}
+.errorMessage{
+  color:red;
+  padding:0
+}
+/* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+  form{
+    display: block;
+    width:100%;
+    padding:0
+  }
+  .col-50 {
+      width: 100%;
+  }
+}
+@media screen and (max-width: 1000px) {
+  .converterImage{
+    right:53%;
+  }
+}
+@media screen and (max-width: 599px) {
+  .converterImage{
+    width: 30px;
+    position: static;
+    top: 0;
+    right: 0;
+    padding: 10px;
+  -webkit-transform: rotate(90deg);     /* Chrome and other webkit browsers */
+  -moz-transform: rotate(90deg);        /* FF */
+  -o-transform: rotate(90deg);          /* Opera */
+  -ms-transform: rotate(90deg);         /* IE9 */
+  transform: rotate(90deg);   
+  margin-left: 42%;
+  }
+}

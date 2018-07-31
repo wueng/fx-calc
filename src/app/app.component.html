@@ -1,0 +1,43 @@
+<form [formGroup]="currencyFormGroup">
+  <div class="row">
+    <div class="col-50">
+      <div class="select-dropdown">
+        <label>From</label>
+        <select class='select-option' (ngModelChange)='onOptionsSelected($event)' (ngModel)="fromCountryName" formControlName="fromCountry">
+          <option value="" disabled selected>From Country</option>
+          <option class='option' *ngFor='let option of options' [ngValue]="option">{{option.name}}</option>
+        </select>
+      </div>
+      <div class="col-50 currencyFields" *ngIf="showInputFields">
+        <input type="text" numericOnly formControlName="fromCountryValue" placeholder="Send">
+        <div *ngFor='let option of options'>
+          <span class="currencySymbol" *ngIf="option.name == fromCountry">{{option['currencies']['0']['symbol']}}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <img class="converterImage" src="assets/convert.png">
+  </div>
+  <div class="row">
+    <div class="col-50">
+      <label>To</label>
+      <div class="select-dropdown">
+        <select class='select-option2' (ngModelChange)='onOptionsSelected2($event)' (ngModel)="toCountryName" formControlName="toCountry">
+          <option value="" disabled selected>To Country</option>
+          <option class='option' *ngFor='let option of options' [ngValue]="option">{{option.name}}</option>
+        </select>
+      </div>
+      <div class="col-50 currencyFields" *ngIf="showInputFields">
+        <input type="text" numericOnly formControlName="toCountryValue" placeholder="Receive Amount">
+        <div *ngFor='let option of options'>
+          <span class="currencySymbol" *ngIf="option.name == toCountry">{{option['currencies']['0']['symbol']}}</span>
+        </div>
+      </div>
+      <div *ngIf="currencyFormGroup.get('toCountryValue').errors && currencyFormGroup.get('toCountryValue').dirty &&
+      currencyFormGroup.get('toCountryValue').errors.validField">
+        <label class="errorMessage">Please Enter the Send Amount, this field will populate automatically.</label>
+      </div>
+    </div>
+  </div>
+</form>
