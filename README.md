@@ -1,30 +1,27 @@
-# FX Calculator
+# CurrencyConverter
 
-## Description
-Create a simple, responsive currency exchange application using chosen front-end and javascript framework. Application should validate and format user input, be tested and come with setup documentation.
+## Check that you have node and npm installed</br>
 
-Using free, public API's is allowed and encouraged to retrieve lists of countries, currencies and fx rates. 
+### To check if you have Node.js installed, run this command in your terminal:</br>
+    
+   `node -v`</br>
+   
+### To confirm that you have npm installed you can run this command in your terminal:</br>
+    
+   `npm -v`</br>
+    
+## Install NPM</br>
+  
+  `npm install` </br>
+  (in package directory, no arguments):</br>
+  Install the dependencies in the local node_modules folder.</br>
+  In global mode (ie, with -g or --global appended to the command), it installs the current package context (ie, the current working         directory) as a global package.</br>
 
-## Sketch
-![Sketch](https://i.imgur.com/rOyVXlz.png)
+## Install Angular CLI</br>
+    
+   `npm install -g @angular/cli`</br>
+   
+## Development server</br>
 
-1. Choose FROM country
-1. Choose TO country
-1. Enter/show SEND amount (editable field)
-1. Show selected FROM country currency
-1. Enter/show RECEIVE amount (editable field)
-1. Show selected TO country currency
+Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
-## Application requirements
-- [ ] Git and Github for code versioning
-- [ ] Setup documentation
-- [ ] Responsive
-- [ ] Field formatting and validation
-- [ ] Testing
-
-## Technologies
-- [ ] HTML/CSS framework
-- [ ] Javascript framework
-
-## Final application
-Please work on a fork. After completing the application, please create a Pull Request to this repository.
